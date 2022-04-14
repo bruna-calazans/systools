@@ -6,12 +6,11 @@ Created on Wed Sep 30 08:32:27 2020
 
 Funções para plotar resultados da regressão em um arquivo HTML
 """
-import os
+import os, sys
 import pandas as pd
 import scipy as sp
 import numpy as np
 
-import webbrowser
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -31,6 +30,12 @@ import plotly.express as px
 import plotly.figure_factory as ff
 import plotly as py
 from plotly.figure_factory import create_distplot
+
+
+# systools modules
+# TODO ideally i do not want to mess around with path
+sys.path.insert(1, os.path.abspath('.'))
+from report import text2html
 
 #%% nomeia arquivo HTML no formato desejado 
 #regModel_Ycolumns=Xcolumns_intercepYESorNO_ZNnumberOfRows.html
@@ -56,52 +61,7 @@ def give_name(x, y, intercept):
     number_of_rows = str(len(x))
     return 'regModel_' + Ycolumns + '=' + Xcolumns + inter + number_of_rows + '.html'
 
-#%% plot functions    HTML
-# TODO remove from here and use the report functions   
-def save_html(name, list_2_plots):
-    html_str_complete = ''
-    with open(name, 'w') as file:
-        file.write(
-             '''
-             <!DOCTYPE html>
-              <html>
-              <div>''')
 
-        for fig in list_2_plots:
-            if isinstance(fig, str):
-                # já é um texto
-                html_string = fig
-            elif isinstance(fig, list): 
-                # list of two figures to put side by side in a simple way
-                str1= fig[0].to_html(full_html=False, include_plotlyjs='cdn')
-                str1 = str1.replace('<div>', '<div style="width: 45%; float:left">')
-                
-                str2= fig[1].to_html(full_html=False, include_plotlyjs='cdn')
-                str2 = str2.replace('<div>', '<div style="width: 45%; float:right">')
-                
-                html_string = '<div>' + str1 + str2 + '</div'
-            else: 
-                # é uma figura do plotly, passar para texto html
-                html_string = fig.to_html(full_html=False, include_plotlyjs='cdn')
-            #html_string = html_string.replace('width:100%','width: 80%, align="center"')
-            file.write(html_string)
-            html_str_complete = html_str_complete + html_string 
-        file.write('</div></html>')   
-    return html_str_complete + '</div></html>'       
-        
-def text2html(title=False, subtitle=False, text=[]):
-    ''' Retorna uma DIV em HTML de texto
-    @text: string ou lista de strings. Se lista, força um enter a cda membro'''
-    if not isinstance(text, list): text = [text]
-    
-    html = '<div>'
-    if title: html = html + '<h1>'+title + '</h1>'
-    if subtitle: html = html + '<h2>'+subtitle + '</h2>'
-    # each member list is a new line
-    #text = [t +'<br>' for t in text]
-    html = html + '<p style="color:#1F1321;font-size:20px;">'+ '<br>'.join(text) + '</p>'  
- 
-    return html + '</div>'
 #%% Aux plots
 def plot_predictions(y, y_predicted, student_residuals):
     '''Plota lado a lado gráfico de Observed X Predicted + Studentized Errors'''
@@ -572,119 +532,11 @@ def plot_regression(model, x,y, intercept):
         # TODO colocar a tabela do VIF ao lado da grafico de multicorrlinear
         # TODO salvar o sns.pairplot como PNG e colcoar ele no HTML
         #sns.pairplot(data =x)  
+ 
+    return list_2_plots
     
-    # TODO 
-    # Monta o nome do HTML
-    name = give_name(x, y, intercept)
-    # save all plots in a HTML file for inspection
-    html_de_aba = save_html(name, list_2_plots)
-    return name, html_de_aba
-    
-def open_html(name):
-    filename = "file:///" + os.getcwd()+'/' + name
-    webbrowser.open_new_tab(filename)
-    return
 
-def html_abas(FileName, htmlFile, htmlFileOut, grafico):
-    with open(FileName,"w") as html:
-        html.write("""<!DOCTYPE html>
-<html>
-<head>
-<title>Modelos de Regressão</title>
-<style>
-*{
-padding: 0;
-}
-body{
-background-color: #fff;
-font-family: Arial;
-}
-.nav_tabs{
-margin: 5px auto;
-background-color: #fff;
-position: relative;
-}
-.nav_tabs ul{
-list-style: none;
-}
-.nav_tabs ul li{
-float: left;
-height: 320px;
-width: 165px;
-}
-.nav_tabs label{
-width: 120px;
-height: 25px;
-padding: 20px;
-border-radius: 8px 8px 0 0;
-background-color: #363b48;
-display: block;
-color: #fff;
-cursor: pointer;
-text-align: center;
-}
-.rd_tabs:checked ~ label{
-background-color: #e54e43;
-}
-.rd_tabs{
-display: none;
-}
-.content{
-border-top: 5px solid #e54e43;
-background-color: #fff;
-display: none;
-position: absolute;
-width: 1000px;
-left: 0;
-}
-.rd_tabs:checked ~ .content{
-display: block;
-}
 
-</style>
-</head>
-<body>
 
-  <nav class="nav_tabs">
-      <ul>
-          <li>
-          <input type="radio" name="tabs" class="rd_tabs" id="tab1" checked>
-          <label for="tab1">Regressão</label>
-          <div class="content">
-          <article>""")
-        
-        html.write(htmlFile)
-          
-        html.write("""</article>
-          </li>
-          <li>
-          <input type="radio" name="tabs" class="rd_tabs" id="tab2">
-          <label for="tab2">Regressão Otimizada</label>
-          <div class="content">
-          <article>""")
-        
-        html.write(htmlFileOut)
-        
-        html.write("""</article>
-          </div>
-          </li>
-          <li>
-          <input type="radio" name="tabs" class="rd_tabs" id="tab3">
-          <label for="tab3">Gráfico R²</label>
-          <div class="content">
-          """)
-          
-        html.write(grafico)
-        
-        html.write("""
-          </div>
-          </li>
-      </ul>
-  </nav>
-
-</body>
-</html>
-""")
-    return
     
   

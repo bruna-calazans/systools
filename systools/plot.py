@@ -10,7 +10,7 @@ Módulo para plotar gráficos e mapas padronizados
 """
 
 def hist():
-    # TODO - Pedro colcoar aqui o código que gera histograma novo do PyPass
+    # TODO - Pedro colocar aqui o código que gera histograma novo do PyPass
     # esse código deve ser enxuto, criar módulo helper *charts*
     '''
     plota um histograma da coisa belinho, escolhe facilmente entre
