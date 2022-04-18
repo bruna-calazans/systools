@@ -11,12 +11,13 @@ import geopandas as gpd
 from zipfile import ZipFile
 from openpyxl import load_workbook
 
-#%% HELPERS
+
+# HELPERS
 def get_american_standers(flag):
     """
-    If flag is true, return the american stander decimal and separator
-    :param flag: bool True or False
-    :return: dictionary to read or write csv's
+    If flag is true, return the american stander decimal and separator.
+    :param flag: bool True or False.
+    :return: dictionary to read or write csv's.
     """
     if flag:
         keys = {'sep': ',', 'decimal': '.'}
@@ -26,40 +27,45 @@ def get_american_standers(flag):
 
 
 def file_name_with_extension(path, name, ext='.csv'):
-    # reassures passed name is without extension
+    # Reassures passed name is without extension.
     name = os.path.splitext(os.path.basename(name))[0]
     name_ext = os.path.normpath(os.path.join(path, name)) + ext
     return name_ext
 
-#%% LOAD FILES
-def load_text_file(path, name, cols=None, USA=False, kwargs={}):
+
+# LOAD FILES
+def load_text_file(path, name, cols=None, usa=False, kwargs=None):
     """
     Reads a textfile or excel 
     :param path: path of file, may end with .zip if name inside a zipfile
     :param name: name of file with extension
     :param cols: columns to load
-    :param american: if american is true, decimals=','
+    :param usa: if american is true, decimals=','
     :param kwargs: all kwargs accepted by pd.read_csv as a dictionary
     :return: a dataFrame
     """
-    keywords = get_american_standers(USA)
+    if kwargs is None:
+        kwargs = {}
+
+    keywords = get_american_standers(usa)
     kwargs = {**keywords, **kwargs}
     
     if 'engine' not in kwargs.keys(): 
-        if 'low_memory' not in kwargs.keys(): kwargs['low_memory'] = False
+        if 'low_memory' not in kwargs.keys():
+            kwargs['low_memory'] = False
     
-    # escolhe entre ler csv ou excel
+    # Escolhe entre ler csv ou excel.
     def read(pathname):
         if name.lower().endswith('.xlsx'):            
             kwargs.pop('low_memory', None)
             kwargs.pop('sep', None)
             kwargs.pop('decimal', None)
-            df = pd.read_excel(pathname, usecols=cols, **kwargs)
-        else :
-            df = pd.read_csv(pathname, usecols=cols, **kwargs)
-        return df
+            df_ltf = pd.read_excel(pathname, usecols=cols, **kwargs)
+        else:
+            df_ltf = pd.read_csv(pathname, usecols=cols, **kwargs)
+        return df_ltf
     
-    # trata caso se está ZIPADO
+    # Trata caso esteja ZIPADO.
     if path[-3:] == 'zip':
         with ZipFile(os.path.normpath(path)) as z:
             with z.open(name) as myFile:
@@ -67,8 +73,11 @@ def load_text_file(path, name, cols=None, USA=False, kwargs={}):
     else:
         df = read(os.path.normpath(os.path.join(path, name)))
 
-    df.dropna(how="all", inplace=True) # drop rows that contains only NaN
-    if df.shape[0] > 1: df.dropna(how="all", inplace=True, axis=1) # drop cols that contains only NaN
+    # Drop rows that contains only NaN
+    df.dropna(how="all", inplace=True)
+    # Drop cols that contains only NaN
+    if df.shape[0] > 1:
+        df.dropna(how="all", inplace=True, axis=1)
 
     return df
 
@@ -83,12 +92,12 @@ def load_shp_file(path, name, cols=None):
     """
     df = gpd.read_file(os.path.normpath(os.path.join(path, name)))
     try:
-        # look for the auxiliary document with the compleat name of columns
+        # Look for the auxiliary document with the compleat name of columns.
         aux = os.path.join(path, name[:-3]+'col')
-        aux = pd.read_csv(aux, header=None,engine='python')
+        aux = pd.read_csv(aux, header=None, engine='python')
         aux_dict = dict(zip(aux[1], aux[0]))
         df = df.rename(columns=aux_dict)
-    except:
+    except FileNotFoundError:
         pass
     
     if cols is not None:
@@ -99,38 +108,38 @@ def load_shp_file(path, name, cols=None):
                 raise Exception(msg_error)
             else:
                 pass
-        df = df.loc[:, cols]  # return only expected columns
+        df = df.loc[:, cols]  # Return only expected columns
     return df
 
 
-
-def load_file(path, name, expected_cols, USA, **kwargs):    
+def load_file(path, name, expected_cols, usa, **kwargs):
     
     if name is None:
         name = os.path.basename(path)
         path = os.path.dirname(path)
     
-    # checks if name contains the supored extensions
-    extensions = ['txt', 'csv', 'shp','dbf','xlsx','parquet']
+    # Checks if name contains the suported extensions.
+    extensions = ['txt', 'csv', 'shp', 'dbf', 'xlsx', 'parquet']
     try:
         ext = name.split(".")[1].lower()
         assert ext in extensions, f'{ext:} is not supported. Options are {extensions}'
     except IndexError:
         raise Exception('Param "name" was provided without extension')
 
-
     if ext in ['shp', 'dbf']:
         df = load_shp_file(path, name, expected_cols)      
-        if df.geometry.isnull().all(): del df['geometry']       
+        if df.geometry.isnull().all():
+            del df['geometry']
     elif ext in ['parquet']:
         df = pd.read_parquet(path + '\\' + name, columns=expected_cols)
     else:        
-        df = load_text_file(path, name, expected_cols, USA, **kwargs)
+        df = load_text_file(path, name, expected_cols, usa, **kwargs)
 
     return df
 
-#%% SAVE FILES
-def save_df_as_csv(df, path, name='test', american=False, kwargs={}):
+
+# SAVE FILES
+def save_df_as_csv(df, path, name='test', american=False, kwargs=None):
     """
     Saves a data frame in a CSV
     :param df: dataFrame
@@ -140,10 +149,13 @@ def save_df_as_csv(df, path, name='test', american=False, kwargs={}):
     :param kwargs: args for df.to_csv method from pandas
     :return: nothing
     """
+    if kwargs is None:
+        kwargs = {}
+
     keywords = get_american_standers(american)
     kwargs = {**keywords, **kwargs}
 
-    # reasures passed name is without extension
+    # Reasures passed name is without extension
     file_name = file_name_with_extension(path, name)
     df.to_csv(file_name, **kwargs)
     return True
@@ -154,20 +166,21 @@ def save_df_as_parquet(df, path, name):
         df.columns = df.columns.astype(str)
         file_name = file_name_with_extension(path, name, ext='.parquet')
         df.to_parquet(file_name, compression=None)
-    except:
+    except ValueError:
         print('Error while creating a usable Parquet, creating a CSV instead...')
         save_df_as_csv(df, path, name, american=False)
         
     return True
 
+
 def save_df_as_shp(df, path, name):
-    # there is a limitation with SHPs that only saves columns with 10charcMax
-    # so we are doing a gambiarra...
+    # There is a limitation with SHPs that only saves columns with 10charcMax.
+    # So we are doing a gambiarra...
     
     col_names = list(df.columns)
     col_names.remove('geometry')
     
-    aux_dict = dict(zip(col_names, ['c'+str(x) for x in list(range(0,len(col_names)))] ))    
+    aux_dict = dict(zip(col_names, ['c'+str(x) for x in list(range(0, len(col_names)))]))
     temp = pd.Series(aux_dict).to_frame()
     temp.to_csv(os.path.normpath(os.path.join(path, name + '.col')), 
                 header=False, index=True)
@@ -179,8 +192,7 @@ def save_df_as_shp(df, path, name):
 
 
 def save_df_as_excel(df, path, name, sheet_name='Sheet1', startrow=None,
-                       truncate_sheet=False, 
-                       **to_excel_kwargs):
+                     truncate_sheet=False, **to_excel_kwargs):
     """
     Append a DataFrame [df] to existing Excel file [path, name]
     into [sheet_name] Sheet.
@@ -202,63 +214,63 @@ def save_df_as_excel(df, path, name, sheet_name='Sheet1', startrow=None,
 
     Returns: None
     """
+
     filename = file_name_with_extension(path, name, ext='.xlsx')
            
-    # ignore [engine] parameter if it was passed
+    # Ignore [engine] parameter if it was passed.
     if 'engine' in to_excel_kwargs:
         to_excel_kwargs.pop('engine')
 
     writer = pd.ExcelWriter(filename, engine='openpyxl')
 
     try:
-        # try to open an existing workbook
+        # Try to open an existing workbook.
         writer.book = load_workbook(filename)
 
-        # get the last row in the existing Excel sheet
-        # if it was not specified explicitly
+        # Get the last row in the existing Excel sheet.
+        # If it was not specified explicitly.
         if startrow is None and sheet_name in writer.book.sheetnames:
             startrow = writer.book[sheet_name].max_row
 
-        # truncate sheet
+        # Truncate sheet.
         if truncate_sheet and sheet_name in writer.book.sheetnames:
-            # index of [sheet_name] sheet
+            # Index of [sheet_name] sheet.
             idx = writer.book.sheetnames.index(sheet_name)
-            # remove [sheet_name]
+            # Remove [sheet_name].
             writer.book.remove(writer.book.worksheets[idx])
-            # create an empty sheet [sheet_name] using old index
+            # Create an empty sheet [sheet_name] using old index.
             writer.book.create_sheet(sheet_name, idx)
 
-        # copy existing sheets
-        writer.sheets = {ws.title:ws for ws in writer.book.worksheets}
+        # Copy existing sheets.
+        writer.sheets = {ws.title: ws for ws in writer.book.worksheets}
     except FileNotFoundError:
         # file does not exist yet, we will create it
         pass
 
-    if startrow is None: startrow = 0
+    if startrow is None:
+        startrow = 0
 
     # write out the new sheet
     df.to_excel(writer, sheet_name, startrow=startrow, 
-                index=False,**to_excel_kwargs)
+                index=False, **to_excel_kwargs)
 
     # save the workbook
     writer.save()
-    return
+    return None
 
 
 # TODO see if this function works and add the option do data.save_file()
-def save_zip(df, path, zip_file, fileName):
+def save_zip(df, path, zip_file, file_name):
     # first needs to save the file normally
-    temp_file = file_name_with_extension(path, fileName, ext='.txt')
+    temp_file = file_name_with_extension(path, file_name, ext='.txt')
     df.to_csv(temp_file, index=None, sep=';', mode='w', float_format='%.6f',
               decimal=',', date_format='%d/%m/%Y %H:%M:%S')
     # then add its to the zip
     # TODO with file already in zip delete it first
     zip_path = file_name_with_extension(path, zip_file, ext='.zip')
     with ZipFile(zip_path, 'a') as z:
-        z.write(temp_file, fileName + '.txt')
+        z.write(temp_file, file_name + '.txt')
     # now delete the temp file
     os.remove(temp_file)
 
     return True
-
-
