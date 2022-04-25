@@ -221,11 +221,10 @@ def save_df_as_excel(df, path, name, sheet_name='Sheet1', startrow=None,
     if 'engine' in to_excel_kwargs:
         to_excel_kwargs.pop('engine')
 
-    writer = pd.ExcelWriter(filename, engine='openpyxl')
-
     try:
         # Try to open an existing workbook.
-        writer.book = load_workbook(filename)
+        load_workbook(filename)
+        writer = pd.ExcelWriter(filename, engine='openpyxl')
 
         # Get the last row in the existing Excel sheet.
         # If it was not specified explicitly.
@@ -249,6 +248,8 @@ def save_df_as_excel(df, path, name, sheet_name='Sheet1', startrow=None,
 
     if startrow is None:
         startrow = 0
+
+    writer = pd.ExcelWriter(filename, engine='openpyxl')
 
     # write out the new sheet
     df.to_excel(writer, sheet_name, startrow=startrow, 

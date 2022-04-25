@@ -13,7 +13,7 @@ import textwrap
 from inspect import currentframe
 
 # Systools Modules
-import helpers.readWrite as rW
+import systools.helpers.readWrite as rW
 
 
 def dataframe2numeric(df, col_dt_preffix=None, col_td_preffix=None):
@@ -103,8 +103,7 @@ def open_file(path, name=None, expected_cols=None, usa=False, col_td_preffix='ga
 # Insert excel parameters if needed, after the "truncate_sheet" parameter.
 
 def save_file(df, path, name='test', usa=False, ext='csv',
-              sheet_name='Sheet1', start_row=None, truncate_sheet=False,
-              **kwargs):
+              sheet_name='Sheet1', start_row=None, truncate_sheet=False):
 
     # Salva o arquivo em CSV (default) ou SHP (defalut se tiver geometria).
     # Pode escolher tbm as outras coisas
@@ -116,21 +115,14 @@ def save_file(df, path, name='test', usa=False, ext='csv',
             
     extensions = ['shp', 'csv', 'parquet', 'excel']
 
-    # Standard keywords to save a dataframe, can be overwriten by kwargs.
-
-    keywords = {'index': None,
-                'float_format': '%.6f', 
-                'date_format': '%d/%m/%Y %H:%M:%S'}
-    kwargs = {**keywords, **kwargs}
-    
     if 'geometry' in df.columns or ext == 'shp':
         rW.save_df_as_shp(df, path, name)
     elif ext == 'csv':
-        rW.save_df_as_csv(df, path, name, usa, **kwargs)
+        rW.save_df_as_csv(df, path, name, usa)
     elif ext == 'parquet':
         rW.save_df_as_parquet(df, path, name)
     elif ext == 'excel':
-        rW.save_df_as_excel(df, path, name, sheet_name, start_row, truncate_sheet, **kwargs)
+        rW.save_df_as_excel(df, path, name, sheet_name, start_row, truncate_sheet)
     else: 
         raise Exception(f'ext parameter must be one of the following {extensions}')
     print(f'{currentframe().f_code.co_name} {textwrap.shorten(name, width=50):50} {len(df):>9,}')

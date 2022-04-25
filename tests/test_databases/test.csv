@@ -1,0 +1,4 @@
+;id;name;integer;float;text_float;text_int
+0;1;ugly_rmbh;1;0,2;0.2;1
+1;2;ugly_rn;2;0,4;0.4;2
+2;3;ugly_nl;3;0,6;0.6;6
