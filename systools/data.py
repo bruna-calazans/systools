@@ -9,14 +9,12 @@ Módulo com funções úteis no tratamento de dados tabulados.
 """
 # Python Modules
 import pandas as pd
-import textwrap
-from inspect import currentframe
 
 # Systools Modules
 import systools.helpers.readWrite as rW
 
 
-def dataframe2numeric(df, col_dt_preffix=None, col_td_preffix=None):
+def dataframe2numeric(df, col_dt_preffix='', col_td_preffix=''):
 
     """
     Format the DataFrame columns to Numeric and Time Formats.
@@ -53,9 +51,19 @@ def dataframe2numeric(df, col_dt_preffix=None, col_td_preffix=None):
     df[other_cols] = df[other_cols].apply(pd.to_numeric, errors='ignore')
     
     # Select Cols to Convert
-    cols_dt = [col for col in all_cols if col.startswith(col_dt_preffix)]
-    cols_td = [col for col in all_cols if col.startswith(col_td_preffix)]
-    
+    if col_dt_preffix != '':
+
+        cols_dt = [col for col in all_cols if col.startswith(col_dt_preffix)]
+
+    else:
+        cols_dt = []
+
+    if col_td_preffix != '':
+
+        cols_td = [col for col in all_cols if col.startswith(col_td_preffix)]
+
+    else:
+        cols_td = []
     # Transform Timedeltas and Datetimes to its format.
     for col in cols_td:
         df[col] = pd.to_timedelta(df[col])
@@ -86,7 +94,7 @@ def open_file(path, name=None, expected_cols=None, usa=False, col_td_prefix='gap
 
     """
     Open file as a DataFrame.
-    Support csv, txt, parquet, excel, shape, dbf and ziped files.
+    Support csv, txt, parquet, excel and shape.
 
     Parameters
     ----------
@@ -122,9 +130,8 @@ def open_file(path, name=None, expected_cols=None, usa=False, col_td_prefix='gap
     
     df = rW.load_file(path, name, expected_cols, usa, **kwargs)
          
-    # configure formats
+    # Configure Formats
     df = dataframe2numeric(df, col_dt_prefix, col_td_prefix)
-    print(f'{currentframe().f_code.co_name} {textwrap.shorten(name, width=50):50} {len(df):>9,}')
     return df
 
 
@@ -172,7 +179,7 @@ def save_file(df, path, name='test', usa=False, ext='csv',
 
     """
             
-    extensions = ['shp', 'csv', 'parquet', 'excel']
+    extensions = ['shp', 'csv', 'parquet', 'xlsx']
 
     if 'geometry' in df.columns or ext == 'shp':
         rW.save_df_as_shp(df, path, name)
@@ -180,11 +187,10 @@ def save_file(df, path, name='test', usa=False, ext='csv',
         rW.save_df_as_csv(df, path, name, usa)
     elif ext == 'parquet':
         rW.save_df_as_parquet(df, path, name)
-    elif ext == 'excel':
+    elif ext == 'xlsx':
         rW.save_df_as_excel(df, path, name, sheet_name, start_row, truncate_sheet)
     else: 
         raise Exception(f'ext parameter must be one of the following {extensions}')
-    print(f'{currentframe().f_code.co_name} {textwrap.shorten(name, width=50):50} {len(df):>9,}')
     return None
 
 
@@ -360,7 +366,7 @@ def flatten_hierarchical_col(col, sep='_'):
                 new_col += str(level)
     return new_col
 
+# Faz o download automático de dados do IBGE/vários outros.
 
-def download():
-    # Faz o download automático de dados do IBGE/vários outros
-    return None
+# def download():
+    # return None

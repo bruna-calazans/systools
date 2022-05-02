@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Feb  8 10:55:13 2018
-
-@author: bcalazans
-"""
 import os
 import pandas as pd
 import geopandas as gpd
@@ -14,11 +8,7 @@ from openpyxl import load_workbook
 
 # HELPERS
 def get_american_standers(flag):
-    """
-    If flag is true, return the american stander decimal and separator.
-    :param flag: bool True or False.
-    :return: dictionary to read or write csv's.
-    """
+
     if flag:
         keys = {'sep': ',', 'decimal': '.'}
     else:
@@ -35,15 +25,7 @@ def file_name_with_extension(path, name, ext='.csv'):
 
 # LOAD FILES
 def load_text_file(path, name, cols=None, usa=False, kwargs=None):
-    """
-    Reads a textfile or excel 
-    :param path: path of file, may end with .zip if name inside a zipfile
-    :param name: name of file with extension
-    :param cols: columns to load
-    :param usa: if american is true, decimals=','
-    :param kwargs: all kwargs accepted by pd.read_csv as a dictionary
-    :return: a dataFrame
-    """
+
     if kwargs is None:
         kwargs = {}
 
@@ -83,13 +65,7 @@ def load_text_file(path, name, cols=None, usa=False, kwargs=None):
 
 
 def load_shp_file(path, name, cols=None):
-    """
-    Reads a shapefile or a DBF lonly file
-    :param path: path of file
-    :param name: name of file with extension
-    :param cols: columns expected
-    :return: return the data as a geodataframe
-    """
+
     df = gpd.read_file(os.path.normpath(os.path.join(path, name)))
     try:
         # Look for the auxiliary document with the compleat name of columns.
@@ -140,15 +116,7 @@ def load_file(path, name, expected_cols, usa, **kwargs):
 
 # SAVE FILES
 def save_df_as_csv(df, path, name='test', american=False, kwargs=None):
-    """
-    Saves a data frame in a CSV
-    :param df: dataFrame
-    :param path: path to save the file
-    :param name: name of the files to save, default as 'test'
-    :param american: bool, True or False for american standards
-    :param kwargs: args for df.to_csv method from pandas
-    :return: nothing
-    """
+
     if kwargs is None:
         kwargs = {}
 
@@ -193,27 +161,6 @@ def save_df_as_shp(df, path, name):
 
 def save_df_as_excel(df, path, name, sheet_name='Sheet1', startrow=None,
                      truncate_sheet=False, **to_excel_kwargs):
-    """
-    Append a DataFrame [df] to existing Excel file [path, name]
-    into [sheet_name] Sheet.
-    If [path, name] doesn't exist, then this function will create it.
-
-    Parameters:
-      df : dataframe to save to workbook
-      path:
-      name:
-      sheet_name : Name of sheet which will contain DataFrame.
-                   (default: 'Sheet1')
-      startrow : upper left cell row to dump data frame.
-                 Per default (startrow=None) calculate the last row
-                 in the existing DF and write to the next row...
-      truncate_sheet : truncate (remove and recreate) [sheet_name]
-                       before writing DataFrame to Excel file
-      to_excel_kwargs : arguments which will be passed to `DataFrame.to_excel()`
-                        [can be dictionary]
-
-    Returns: None
-    """
 
     filename = file_name_with_extension(path, name, ext='.xlsx')
            
@@ -243,7 +190,7 @@ def save_df_as_excel(df, path, name, sheet_name='Sheet1', startrow=None,
         # Copy existing sheets.
         writer.sheets = {ws.title: ws for ws in writer.book.worksheets}
     except FileNotFoundError:
-        # file does not exist yet, we will create it
+        # File does not exist yet, we will create it.
         pass
 
     if startrow is None:
@@ -251,27 +198,25 @@ def save_df_as_excel(df, path, name, sheet_name='Sheet1', startrow=None,
 
     writer = pd.ExcelWriter(filename, engine='openpyxl')
 
-    # write out the new sheet
+    # Write out the new sheet.
     df.to_excel(writer, sheet_name, startrow=startrow, 
                 index=False, **to_excel_kwargs)
 
-    # save the workbook
+    # Save the workbook.
     writer.save()
     return None
 
 
-# TODO see if this function works and add the option do data.save_file()
 def save_zip(df, path, zip_file, file_name):
-    # first needs to save the file normally
+    # First needs to save the file normally.
     temp_file = file_name_with_extension(path, file_name, ext='.txt')
     df.to_csv(temp_file, index=None, sep=';', mode='w', float_format='%.6f',
               decimal=',', date_format='%d/%m/%Y %H:%M:%S')
-    # then add its to the zip
-    # TODO with file already in zip delete it first
+    # Then add its to the zip.
     zip_path = file_name_with_extension(path, zip_file, ext='.zip')
     with ZipFile(zip_path, 'a') as z:
         z.write(temp_file, file_name + '.txt')
-    # now delete the temp file
+    # Now delete the temp file.
     os.remove(temp_file)
 
     return True
