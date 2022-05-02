@@ -11,7 +11,7 @@ Módulo com funções úteis no tratamento de dados tabulados.
 import pandas as pd
 
 # Systools Modules
-import systools.helpers.readWrite as rW
+import systool.helpers.readWrite as rW
 
 
 def dataframe2numeric(df, col_dt_preffix='', col_td_preffix=''):

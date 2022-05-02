@@ -23,7 +23,7 @@ import seaborn as sns
 import warnings
 import tqdm
 
-# systools modules
+# systool modules
 import helpers.linear_regression_make as lrm
 from helpers.linear_regression_plot import plot_regression, give_name
 import report

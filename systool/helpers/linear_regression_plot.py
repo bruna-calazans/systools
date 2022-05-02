@@ -32,7 +32,7 @@ import plotly as py
 from plotly.figure_factory import create_distplot
 
 
-# systools modules
+# systool modules
 # TODO ideally i do not want to mess around with path
 sys.path.insert(1, os.path.abspath('.'))
 from report import text2html

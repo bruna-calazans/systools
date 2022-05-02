@@ -18,7 +18,7 @@ import numbers
 from pyproj import Proj
 from shapely.geometry import LineString, Point
 
-# systools modules
+# systool modules
 import flatt_geom as fg
 
 #%% CALC DISTANCES
