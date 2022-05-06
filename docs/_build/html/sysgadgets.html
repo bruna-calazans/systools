@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>sysgadgets package &#8212; sysgadgets  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="sysgadgets.helpers package" href="sysgadgets.helpers.html" />
+    <link rel="prev" title="setup module" href="setup.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sysgadgets.helpers.html" title="sysgadgets.helpers package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="setup.html" title="setup module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">sysgadgets  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" accesskey="U">sysgadgets</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">sysgadgets package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="sysgadgets-package">
+<h1>sysgadgets package<a class="headerlink" href="#sysgadgets-package" title="Permalink to this headline">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sysgadgets.helpers.html">sysgadgets.helpers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sysgadgets.helpers.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sysgadgets.helpers.html#module-sysgadgets.helpers.readWrite">sysgadgets.helpers.readWrite module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sysgadgets.helpers.html#module-sysgadgets.helpers">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-sysgadgets.data">
+<span id="sysgadgets-data-module"></span><h2>sysgadgets.data module<a class="headerlink" href="#module-sysgadgets.data" title="Permalink to this headline">¶</a></h2>
+<p>Created on Tue Apr 12 10:28:14 2022</p>
+<p>&#64;author: bcalazans &amp; MoleDownTheHole (pcardoso)</p>
+<p>Módulo com funções úteis no tratamento de dados tabulados.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="sysgadgets.data.dataframe2numeric">
+<span class="sig-prename descclassname"><span class="pre">sysgadgets.data.</span></span><span class="sig-name descname"><span class="pre">dataframe2numeric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_dt_preffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_td_preffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sysgadgets.data.dataframe2numeric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format the DataFrame columns to Numeric and Time Formats.
+Support datetime, timestamp, int and float formats.</p>
+<dl class="simple">
+<dt>df<span class="classifier">DataFrame</span></dt><dd><p>DataFrame type variable that has columns who will be converted
+to numeric or time format.</p>
+</dd>
+<dt>col_dt_preffix<span class="classifier">string, optional</span></dt><dd><p>String type variable that have the prefixes used to show that
+the designated column title that contains it,
+must be converted to datetime type.</p>
+</dd>
+<dt>col_td_preffix<span class="classifier">string, optional</span></dt><dd><p>String type variable that have the prefixes used to show that
+the designated column title that contains it,
+must be converted to timedelta type.</p>
+</dd>
+</dl>
+<p>df : DataFrame
+DataFrame used in the input, but with the numeric and time columns converted.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sysgadgets.data.flatten_hierarchical_col">
+<span class="sig-prename descclassname"><span class="pre">sysgadgets.data.</span></span><span class="sig-name descname"><span class="pre">flatten_hierarchical_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sysgadgets.data.flatten_hierarchical_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn multi-index column names into single index
+separated by ‘_’.</p>
+<dl class="simple">
+<dt>col<span class="classifier">Multi-Index Column Title</span></dt><dd><p>Multi-Index column that will be replaced for a single_index column.</p>
+</dd>
+<dt>sep<span class="classifier">String, optional</span></dt><dd><p>Separator for the single_index column name.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>new_col<span class="classifier">Single_Index Column Title</span></dt><dd><p>Multi_Index column title passed in the parameters, but flattened
+as no hierarchical title.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sysgadgets.data.get_col">
+<span class="sig-prename descclassname"><span class="pre">sysgadgets.data.</span></span><span class="sig-name descname"><span class="pre">get_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sysgadgets.data.get_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add columns to an input DataFrame, originated from another DataFrame
+based on a merge correspondence with in common column.</p>
+<dl class="simple">
+<dt>df<span class="classifier">DataFrame</span></dt><dd><p>Main input dataframe that will receive the merged columns.</p>
+</dd>
+<dt>get_cols<span class="classifier">List</span></dt><dd><p>Columns from the other input dataframe you want to merge.</p>
+</dd>
+<dt>from_df<span class="classifier">DataFrame</span></dt><dd><p>Secondary input dataframe that will be used to get the
+columns to be merged.</p>
+</dd>
+<dt>key<span class="classifier">String</span></dt><dd><p>Column in main DataFrame used as key to merge the two DataFrames.</p>
+</dd>
+<dt>key2<span class="classifier">String, optional</span></dt><dd><p>Column in secondary DataFrame used as key to merge the two DataFrames.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ans<span class="classifier">DataFrame</span></dt><dd><p>Main input DataFrame with the merged columns.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sysgadgets.data.get_mask_isin">
+<span class="sig-prename descclassname"><span class="pre">sysgadgets.data.</span></span><span class="sig-name descname"><span class="pre">get_mask_isin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sysgadgets.data.get_mask_isin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a filter mask to be used in a DataFrame based on
+single ou multiple filter.
+(Easier than the usual way)</p>
+<dl class="simple">
+<dt>df<span class="classifier">DataFrame</span></dt><dd><p>DataFrame that the user want to create a mask.</p>
+</dd>
+<dt>key<span class="classifier">String or List</span></dt><dd><p>The column, or columns, that the filter will be applied.</p>
+</dd>
+<dt>base_data<span class="classifier">List and Tuple</span></dt><dd><p>List filled with tuples that each one represents one filter.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>mask<span class="classifier">Series</span></dt><dd><p>A Series of Boolean values that can be used as a mask for
+the input DataFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sysgadgets.data.open_file">
+<span class="sig-prename descclassname"><span class="pre">sysgadgets.data.</span></span><span class="sig-name descname"><span class="pre">open_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_td_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gap'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_dt_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'H_'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sysgadgets.data.open_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open file as a DataFrame.
+Support csv, txt, parquet, excel and shape.</p>
+<dl class="simple">
+<dt>path<span class="classifier">string</span></dt><dd><p>Path of the file, may include the file name with extension.
+If the file is zipped, pass the path with the zip extension.</p>
+</dd>
+<dt>name<span class="classifier">string, optional</span></dt><dd><p>Name of the file with extension to be open.
+Expects that the name was passed on the path arg.</p>
+</dd>
+<dt>expected_cols<span class="classifier">list, optional</span></dt><dd><p>Import only this cols.</p>
+</dd>
+<dt>usa<span class="classifier">Bool, optional</span></dt><dd><p>If TRUE expects comma separator and point as decimal indicator.
+If FALSE expects ; as separator and comma as decimal indicator.</p>
+</dd>
+<dt>col_dt_prefix: String, optional</dt><dd><p>Indicates column name prefix to be converted to datetime.</p>
+</dd>
+<dt>col_td_prefix: String, optional</dt><dd><p>Indicates column name prefix to be converted to timedelta.</p>
+</dd>
+<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs<span class="classifier">dict</span></dt><dd><p>Any argument for the original read functions from (geo)pandas.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>df<span class="classifier">pd.DataFrame or geo.DataFrame</span></dt><dd><p>DataFrame do arquivo lido contendo ou não geometria.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sysgadgets.data.remove_duplicate_safe">
+<span class="sig-prename descclassname"><span class="pre">sysgadgets.data.</span></span><span class="sig-name descname"><span class="pre">remove_duplicate_safe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sysgadgets.data.remove_duplicate_safe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove DataFrame duplicates based on a column,
+or multiple columns, value.</p>
+<dl class="simple">
+<dt>df<span class="classifier">DataFrame</span></dt><dd><p>Dataframe that the user want to drop duplicates.</p>
+</dd>
+<dt>cols<span class="classifier">String or List</span></dt><dd><p>Column or list of columns used as parameter for
+the drop_duplicates function.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>df<span class="classifier">DataFrame</span></dt><dd><p>DataFrame without the duplicates in cols parameter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sysgadgets.data.save_file">
+<span class="sig-prename descclassname"><span class="pre">sysgadgets.data.</span></span><span class="sig-name descname"><span class="pre">save_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Sheet1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_row</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">truncate_sheet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sysgadgets.data.save_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save DataFrame to an exterior file created and formated based
+on various parameters.
+Support csv, txt, parquet, excel and shape.</p>
+<dl class="simple">
+<dt>df<span class="classifier">DataFrame</span></dt><dd><p>DataFrame type variable that has columns who the user
+wants to export.</p>
+</dd>
+<dt>path<span class="classifier">String</span></dt><dd><p>Path of the file.
+Doesn’t need to have the filename and extension included.</p>
+</dd>
+<dt>name<span class="classifier">String, optional</span></dt><dd><p>File name.
+Doesn’t need to have the extension included.</p>
+</dd>
+<dt>usa<span class="classifier">Boolean, optional</span></dt><dd><p>True -&gt; The exported file uses the american format.
+(Ex: Comma as separator, dot as decimal…)
+False -&gt; The exported file doesn’t uses the american format.
+(Ex: Semicolon as separator, comma as decimal…)</p>
+</dd>
+<dt>ext<span class="classifier">String, optional</span></dt><dd><p>The file extension.
+Must be csv, txt, parquet, excel or shape.</p>
+</dd>
+<dt>sheet_name<span class="classifier">String, optional</span></dt><dd><p>The file, when saved as an excel file, sheet name.</p>
+</dd>
+<dt>start_row<span class="classifier">Integer, optional</span></dt><dd><p>The excel file row where the user wants the new data to be inserted.</p>
+</dd>
+<dt>truncate_sheet<span class="classifier">Boolean, optional</span></dt><dd><p>Remove and recreate the destination sheet of the exported excel file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-sysgadgets">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-sysgadgets" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">sysgadgets package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-sysgadgets.data">sysgadgets.data module</a></li>
+<li><a class="reference internal" href="#module-sysgadgets">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="setup.html"
+                          title="previous chapter">setup module</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="sysgadgets.helpers.html"
+                          title="next chapter">sysgadgets.helpers package</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/sysgadgets.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sysgadgets.helpers.html" title="sysgadgets.helpers package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="setup.html" title="setup module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">sysgadgets  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >sysgadgets</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">sysgadgets package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, bcalanzans &amp; pcardoso (MoleDownTheHole).
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>

@@ -1,7 +1,8 @@
-systools_for_pip
-================
+sysgadgets
+==========
 
 .. toctree::
    :maxdepth: 4
 
-   systools
+   setup
+   sysgadgets

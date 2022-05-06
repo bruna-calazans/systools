@@ -1,10 +1,10 @@
-.. systools_pip_version documentation master file, created by
-   sphinx-quickstart on Mon May  2 14:21:12 2022.
+.. sysgadgets documentation master file, created by
+   sphinx-quickstart on Fri May  6 12:07:34 2022.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to systools_pip_version's documentation!
-================================================
+Welcome to sysgadgets's documentation!
+======================================
 
 .. toctree::
    :maxdepth: 2
