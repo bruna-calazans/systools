@@ -15,7 +15,10 @@ setup(
           'pytest',
           'pandas',
           'geopandas',
-          'openpyxl'
+          'openpyxl',
+          'PIL',
+          'matplotlib',
+          'numpy',
+          'seaborn',
       ],
-
 )
