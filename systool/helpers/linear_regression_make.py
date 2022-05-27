@@ -132,24 +132,25 @@ def find_outliers(model, x, y, intercept, cov_type,plot=False):
     df = df.sort_values(by=["RESID"],ascending=True)
     
     # realiza regressões cada hora aumentando o número de observações
-    dfR=pd.DataFrame(columns=['R2','NofObservations','Zones'])
+    dfR=pd.DataFrame(columns=['R2','NofObservations','Zones'], dtype=float)
     for i in range(10, df.shape[0]+1):
         zones = df.index[:i].values
         if intercept: model_out = sm.OLS(y.loc[zones], sm.add_constant(x.loc[zones])).fit(cov_type=cov_type)
         else:  model_out = sm.OLS(y.loc[zones], x.loc[zones]).fit(cov_type=cov_type)
 
-        dfR = dfR.append({'R2':model_out.rsquared,
-                          'NofObservations':len(zones),
-                          'Zones':zones.tolist()}, ignore_index=True)
+        new_line={'R2':model_out.rsquared,
+                 'NofObservations':len(zones),
+                 'Zones':zones.tolist()}
+        dfR = pd.concat([dfR, 
+                         pd.DataFrame.from_records([new_line])],ignore_index=True)
         
     min_zn_out = len(zones)-int(0.1*len(zones)) # Qtd total de zonas menos os 10% de outliers
     xmax = len(zones)
     xmin = dfR['NofObservations'].min()
-    zn_rmax = dfR.set_index('NofObservations').loc[min_zn_out:,'R2'].idxmax()
+    zn_rmax = int(dfR.set_index('NofObservations').loc[min_zn_out:,'R2'].idxmax())
     rmax = dfR.set_index('NofObservations').loc[zn_rmax,'R2']
 
-# Para gerar o mapa
-    
+    # Para gerar o mapa   
     mask = dfR.NofObservations.isin(list(range(zn_rmax+1,xmax+1)))
     dfR['Bool']=np.where(mask,1,0)
     

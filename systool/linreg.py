@@ -30,13 +30,35 @@ import report
 
 
 def fit_model(x, y, intercept=False, cov_type='nonrobust', plot=False, path=None):
-    # TODO - mudar o default para o default so stats
-    ''' Executa regressão e testa retirada de outliers
-    Retorna dois modelos, um completo e outro sem outliers
-    if plot=True, registra testes e resultados em um HTML 
-    x: dataFrame com colunas das variáveis INDEPENDENTE
-    y: dataFrame com as colunas da variável dependente (que queremos prever)
     '''
+    Executa regressão e testa retirada de outliers
+    Retorna dois modelos, um completo e outro sem outliers
+
+    Parameters
+    ----------
+    x : pd.Series ou pd.DataFrame
+        Variáveis independentes do modelo de regressão.
+    y : pd.Series
+        Variável dependente do modelo de regressão. Geralmente, ATRAÇÃO ou PRODUÇÃO de viagens.
+    intercept : bool, optional
+        True para forçar que regressão cruze o eixo 0. The default is False.
+    cov_type : str, optional
+        See regression.linear_model.RegressionResults for a description of the available covariance estimators.. The default is 'nonrobust'.
+    plot : bool, optional
+        Gera um arquivo HTML com vários testes estatísticos. The default is False.
+    path : str, optional
+        Salva o arquivo HTML no caminho indicado. The default is None (does not save file)
+
+    Returns
+    -------
+    model : container or StatsModelResults
+        Modelo com todos os registors.
+    model_out : container or StatsModelResults
+        Modelo otimizado sem outliers.
+
+    '''
+    # TODO - mudar o default para o default so stats
+
     if isinstance(x,pd.Series): x = pd.DataFrame(x)
     #if isinstance(y,pd.Series): y = pd.DataFrame(y)
     #http s://stats.stackexchange.com/questions/47913/pandas-statsmodel-scikit-learn
@@ -105,6 +127,7 @@ def loop_models(df, Xcols, Ycol, mask=None, keepAll=False, CUT_R=0.5, force_inte
             > intercept (True or Flse)
             > plot (True or False)
             > covType (nonrobust, HC3, etc)
+
     Returns
     -------
     df_regs : pandas dataFrame
