@@ -159,13 +159,11 @@ def hist(what, bins=5, lwl=float('-inf'), upl=float('inf'),
     return fig
 
 
-def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=False, dir_col=None, col_pts=None, col_size=3,
-         coords=['UTMx', 'UTMy'], join_pts=None, col_zns=None):
+def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=False, col_pts=None,
+         col_size=3, coords=['UTMx', 'UTMy'], dir_col='DIR', join_pts=None, col_zns=None):
 
     """
     plota um mapa magicamente
-
-   •	parâmetros para colorir as coisas individualmente/grupos automático
    •	pensar em como adapatar para ter mapa lado a lado tbm automaticamente
    •	Adapatar para ser feito com matplot OU plotly
 
@@ -175,65 +173,67 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
 
     """
 
-    points = gpd.GeoDataFrame(columns=['geometry', col_pts])
-    lines = gpd.GeoDataFrame(columns=['geometry', col_lin, dir_col])
-    zones = gpd.GeoDataFrame(columns=['geometry', col_zns])
+    lines = gpd.GeoDataFrame(columns=['geometry'])
+    points = gpd.GeoDataFrame(columns=['geometry'])
+    zones = gpd.GeoDataFrame(columns=['geometry'])
 
     for shape in shapes:
 
         if 'geometry' not in shape.columns:
             points_gdf = mp.config_crs(shape, coords)
-            points[['geometry', col_pts]] = points[['geometry', col_pts]].append(points_gdf[['geometry', col_pts]])
+            points['geometry'] = points['geometry'].append(points_gdf['geometry'])
 
         shape_type = shape['geometry'].geom_type.to_list()
         shape_type = list(set(shape_type))
 
         if len(shape_type) == 1:
             if shape_type[0] == 'Point' or shape_type[0] == 'MultiPoint':
-                points_gdf = mp.config_crs(shape)
-                points[['geometry', col_pts]] = points[['geometry', col_pts]].append(points_gdf[['geometry', col_pts]])
+                points_gdf = shape
+                points['geometry'] = points['geometry'].append(points_gdf['geometry'])
             elif shape_type[0] == 'Polygon' or shape_type[0] == 'MultiPolygon':
-                zones_gdf = mp.config_crs(shape)
-                zones[['geometry', col_zns]] = zones[['geometry', col_zns]].append(zones_gdf[['geometry', col_zns]])
+                zones_gdf = shape
+                zones['geometry'] = zones['geometry'].append(zones_gdf['geometry'])
             elif shape_type[0] == 'LineString' or shape_type[0] == 'MultiLineString':
-                lines_gdf = mp.config_crs(shape)
+                lines_gdf = shape
                 if dir2dashed and dir_col in shape.columns:
-                    lines[['geometry', col_lin, dir_col]] = lines[['geometry', col_lin, dir_col]].append(lines_gdf[['geometry', col_lin, dir_col]])
+                    lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
                 else:
-                    lines[['geometry', col_lin]] = lines[['geometry', col_lin]].append(lines_gdf[['geometry', col_lin]])
+                    lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
 
         elif len(shape_type) == 2:
             if shape_type[0] == 'Point' and shape_type[0] == 'MultiPoint':
-                points_gdf = mp.config_crs(shape)
-                points[['geometry', col_pts]] = points[['geometry', col_pts]].append(points_gdf[['geometry', col_pts]])
+                points_gdf = shape
+                points['geometry'] = points['geometry'].append(points_gdf['geometry'])
             elif shape_type[0] == 'Polygon' and shape_type[0] == 'MultiPolygon':
-                zones_gdf = mp.config_crs(shape)
-                zones[['geometry', col_zns]] = zones[['geometry', col_zns]].append(zones_gdf[['geometry', col_zns]])
+                zones_gdf = shape
+                zones['geometry'] = zones['geometry'].append(zones_gdf['geometry'])
             elif shape_type[0] == 'LineString' and shape_type[0] == 'MultiLineString':
-                lines_gdf = mp.config_crs(shape)
+                lines_gdf = shape
                 if dir2dashed and dir_col in shape.columns:
-                    lines[['geometry', col_lin, dir_col]] = lines[['geometry', col_lin, dir_col]].append(
-                        lines_gdf[['geometry', col_lin, dir_col]])
+                    lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
                 else:
-                    lines[['geometry', col_lin]] = lines[['geometry', col_lin]].append(lines_gdf[['geometry', col_lin]])
+                    lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
 
         elif len(shape_type) > 2:
-            lines_gdf = shape[(shape['geometry'].geom_type == 'LineString') | (shape['geometry'] == 'MultiLineString')].copy()
+            lines_gdf = shape[(shape['geometry'].geom_type ==
+                               'LineString') | (shape['geometry'] == 'MultiLineString')].copy()
             points_gdf = shape[(shape['geometry'].geom_type == 'Point') | (shape['geometry'] == 'MultiPoint')].copy()
             zones_gdf = shape[(shape['geometry'].geom_type == 'Polygon') | (shape['geometry'] == 'MultiPolygon')].copy()
-            points[['geometry', col_pts]] = points[['geometry', col_pts]].append(points_gdf[['geometry', col_pts]])
+            points['geometry'] = points['geometry'].append(points_gdf['geometry'])
             if dir2dashed and dir_col in shape.columns:
-                lines[['geometry', col_lin, dir_col]] = lines[['geometry', col_lin, dir_col]].append(
-                    lines_gdf[['geometry', col_lin, dir_col]])
+                lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
             else:
-                lines[['geometry', col_lin]] = lines[['geometry', col_lin]].append(lines_gdf[['geometry', col_lin]])
-            zones[['geometry', col_zns]] = zones[['geometry', col_zns]].append(zones_gdf[['geometry', col_zns]])
+                lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
+            zones['geometry'] = zones['geometry'].append(zones_gdf['geometry'])
 
         if dir2dashed and dir_col in shape.columns:
-            lines = lines.merge(shape[['geometry', dir_col]], how='left', left_on='geometry', right_on='geometry')
-
-    lines.rename(columns={'dir_x': 'dir'}, inplace=True)
-    lines.drop(columns='dir_y', inplace=True)
+            lines = lines.merge(shape[['geometry', dir_col]], how='right', left_on='geometry', right_on='geometry')
+        if col_pts in shape.columns and (shape_type[0] == 'Point' or shape_type[0] == 'MultiPoint'):
+            points = points.merge(shape[['geometry', col_pts]], how='right', left_on='geometry', right_on='geometry')
+        if col_lin in shape.columns and (shape_type[0] == 'LineString' or shape_type[0] == 'MultiLineString'):
+            lines = lines.merge(shape[['geometry', col_lin]], how='right', left_on='geometry', right_on='geometry')
+        if col_zns in shape.columns and (shape_type[0] == 'Polygon' or shape_type[0] == 'MultiPolygon'):
+            zones = zones.merge(shape[['geometry', col_zns]], how='right', left_on='geometry', right_on='geometry')
 
     if join_pts is not None:
         points2line = points.groupby(join_pts)['geometry'].apply(lambda x: LineString(x.tolist()))
@@ -248,8 +248,8 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
     ax.add_artist(ScaleBar(1))
 
     if lines is not None and len(lines) > 0:
-        lines, col_lin = mp.group_data(lines, col_lin, 'Rotas')
-        if dir2dashed and dir_col in lines.columns:
+        lines, col_lin, color = mp.group_data(lines, col_lin, 'Rotas')
+        if dir2dashed and 'DIR' in lines.columns:
             lines1 = lines.loc[lines[dir_col] == 1, :]
             lines2 = lines.loc[lines[dir_col] == 2, :]
             lines2plot = [lines1, lines2]
@@ -257,12 +257,18 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
             lines2plot = [lines]
 
         for i, geo in enumerate(lines2plot):
-            color_attrs = mp.get_colors(geo, col_lin, 'dark')
+            color_attrs = mp.get_colors(geo, col_lin)
             for ctype, data in geo.groupby(col_lin):
-                data.plot(color=color_attrs[ctype],
-                          label=ctype,
-                          ax=ax,
-                          linewidth=1, linestyle='-' * (i + 1))
+                if color is None:
+                    data.plot(color=color_attrs[ctype],
+                              label=ctype,
+                              ax=ax,
+                              linewidth=1, linestyle='-' * (i + 1))
+                else:
+                    data.plot(color=color,
+                              label=ctype,
+                              ax=ax,
+                              linewidth=1, linestyle='-' * (i + 1))
 
     plt.setp(ax.get_xticklabels(), visible=False)
     plt.setp(ax.get_yticklabels(), visible=False)
@@ -285,8 +291,8 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
             return 0
 
     if points is not None and len(points) > 0:
-        points, col_pts = mp.group_data(points, col_pts, 'POIs')
-        color_attrs = mp.get_colors(points, col_pts, 'husl')
+        points, col_pts, color = mp.group_data(points, col_pts, 'POIs')
+        color_attrs = mp.get_colors(points, col_pts)
 
         labels = [0, 200, 400, 800]
         labels = [round(x) for x in labels]
@@ -298,27 +304,44 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
         for ctype, data in points.groupby(col_pts):
             if isinstance(col_size, str):
                 for size, data2 in data.groupby('size'):
-                    data2.plot(color=color_attrs[ctype],
-                               label=ctype + labels[size - 1],
-                               ax=ax,
-                               markersize=corresp(size))
-
+                    if color is None:
+                        data2.plot(color=color_attrs[ctype],
+                                   label=ctype + labels[size - 1],
+                                   ax=ax,
+                                   markersize=corresp(size))
+                    else:
+                        data2.plot(color=color,
+                                   label=ctype + labels[size - 1],
+                                   ax=ax,
+                                   markersize=corresp(size))
             else:
-                data.plot(color=color_attrs[ctype],
-                          label=ctype,
-                          ax=ax, zorder=10,
-                          markersize=col_size)
+                if color is None:
+                    data.plot(color=color_attrs[ctype],
+                              label=ctype,
+                              ax=ax, zorder=10,
+                              markersize=col_size)
+                else:
+                    data.plot(color=color,
+                              label=ctype,
+                              ax=ax, zorder=10,
+                              markersize=col_size)
 
     if zones is not None and len(zones) > 0:
-        zones, col_zns = mp.group_data(zones, col_zns, 'Zonas')
+        zones, col_zns, color = mp.group_data(zones, col_zns, 'Zonas')
         color_attrs = mp.get_colors(zones, col_zns)
         for ctype, data in zones.groupby(col_zns):
-            data.plot(color=color_attrs[ctype],
-                      label=ctype,
-                      ax=ax,
-                      alpha=0.1, edgecolor='black')
+            if color is None:
+                data.plot(color=color_attrs[ctype],
+                          label=ctype,
+                          ax=ax,
+                          alpha=0.1, edgecolor='black')
+            else:
+                data.plot(color=color,
+                          label=ctype,
+                          ax=ax,
+                          alpha=0.1, edgecolor='black')
 
-    ax.legend(fontsize=6)  # attention
+    ax.legend(fontsize=6, loc='upper left')  # attention
     plt.axis('equal')
     if path is not None:
         file_name = os.path.join(path, 'chart_' + title + '.png')
@@ -331,6 +354,5 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
 gdf1 = gpd.read_file(r'C:\Users\pcardoso\Downloads\test_plotmap\line.shp')
 gdf2 = gpd.read_file(r'C:\Users\pcardoso\Downloads\test_plotmap\point.shp')
 gdf3 = gpd.read_file(r'C:\Users\pcardoso\Downloads\test_plotmap\polygon.shp')
-gdf1['dir'] = 1
-mapa(shapes=[gdf1, gdf2, gdf3], path=r'C:\Users\pcardoso\Downloads\test_plotmap', col_lin='id', col_pts='id',
-     col_zns='id', dir2dashed=True, dir_col='dir', title='banana', subtitle='nanica')
+mapa(shapes=[gdf1, gdf2, gdf3], path=r'C:\Users\pcardoso\Downloads\test_plotmap', dir_col='dir',
+     title='banana', subtitle='nanica')

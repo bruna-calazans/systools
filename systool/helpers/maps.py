@@ -23,14 +23,22 @@ def get_main_frame(frames):
 def group_data(geo, col, label):
     if col is None:
         # creates a temp col with a unique atribute
+        color = None
         col = 'temp'
         geo[col] = label
-    return geo, col
+    elif col not in geo.columns:
+        color = col
+        col = 'temp'
+        geo[col] = label
+    else:
+        color = None
+    return geo, col, color
 
 
-def get_colors(geo, col, pal='hls'):
+def get_colors(geo, col):
+    urban_systra = ["#C3423F", "#9BC53D", "#fdbf11", "#FDE74C", "#5BC0EB", "#404E4D"]
     keys = list(geo[col].unique())
-    values = sns.color_palette(pal, n_colors=len(keys))
+    values = sns.color_palette(urban_systra, n_colors=len(keys))
     # values = sns.color_palette("Paired", n_colors=len(keys))
     color_attrs = dict(zip(keys, values))
     return color_attrs
