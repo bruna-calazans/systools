@@ -85,9 +85,6 @@ import statsmodels.stats.api as sms
 import statsmodels.stats.stattools as st
 import base64
 from io import BytesIO
-
-from linear_regression_plot import plot_regression, give_name
-
 from itertools import combinations 
 from tqdm import tqdm
 

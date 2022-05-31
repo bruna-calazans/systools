@@ -24,9 +24,9 @@ import warnings
 import tqdm
 
 # systool modules
-import helpers.linear_regression_make as lrm
-from helpers.linear_regression_plot import plot_regression, give_name
-import report
+import systool.helpers.linear_regression_make as lrm
+from systool.helpers.linear_regression_plot import plot_regression, give_name
+from systool.helpers import report
 
 
 def fit_model(x, y, intercept=False, cov_type='nonrobust', plot=False, path=None):

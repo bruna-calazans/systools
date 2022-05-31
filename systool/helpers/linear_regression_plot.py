@@ -13,29 +13,52 @@ import numpy as np
 
 
 import matplotlib.pyplot as plt
-import seaborn as sns
-
-import statsmodels.api as sm
 import statsmodels.stats.api as sms
-import statsmodels.tsa.api as smt
 import statsmodels.stats.stattools as st
 from statsmodels.stats.outliers_influence import variance_inflation_factor
-from statsmodels.graphics import utils
-from statsmodels.tsa.stattools import acf, pacf
+from statsmodels.tsa.stattools import acf
 
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-import plotly.tools as tls
 import plotly.express as px
 import plotly.figure_factory as ff
 import plotly as py
-from plotly.figure_factory import create_distplot
 
 
 # systool modules
 # TODO ideally i do not want to mess around with path
 sys.path.insert(1, os.path.abspath('.'))
-from report import text2html
+
+def text2html(title=False, subtitle=False, text=[]):
+    '''
+    Transforma strings de texto para formato em HTML
+
+    Parameters
+    ----------
+    title : STRING, optional
+        Texto a ser formatado como título. The default is False.
+    subtitle : STRING, optional
+        Texto a ser formatado como subtítulo. The default is False.
+    text : STRING ou lista de STRINGS, optional
+        Textos padrão. Força uma nova linha a cada item da lista.
+        The default is [].
+
+    Returns
+    -------
+    HTML string
+        String de texto contendo os parâmetros passados formatados para HTML.
+
+    '''
+    if not isinstance(text, list): text = [text]
+
+    html = '<div>'
+    if title: html = html + '<h1>' + title + '</h1>'
+    if subtitle: html = html + '<h2>' + subtitle + '</h2>'
+    # each member list is a new line
+    # text = [t +'<br>' for t in text]
+    html = html + '<p style="color:#1F1321;font-size:20px;">' + '<br>'.join(text) + '</p>'
+
+    return html + '</div>'
 
 #%% nomeia arquivo HTML no formato desejado 
 #regModel_Ycolumns=Xcolumns_intercepYESorNO_ZNnumberOfRows.html
