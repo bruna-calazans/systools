@@ -35,10 +35,21 @@ def group_data(geo, col, label):
     return geo, col, color
 
 
-def get_colors(geo, col):
-    urban_systra = ["#C3423F", "#9BC53D", "#fdbf11", "#FDE74C", "#5BC0EB", "#404E4D"]
-    keys = list(geo[col].unique())
-    values = sns.color_palette(urban_systra, n_colors=len(keys))
-    # values = sns.color_palette("Paired", n_colors=len(keys))
-    color_attrs = dict(zip(keys, values))
+def get_colors(geo, col, heat_def=None):
+
+    if heat_def is None:
+
+        urban_systra = ["#C3423F", "#9BC53D", "#fdbf11", "#FDE74C", "#5BC0EB", "#404E4D"]
+        keys = list(geo[col].unique())
+        values = sns.color_palette(urban_systra, n_colors=len(keys))
+        # values = sns.color_palette("Paired", n_colors=len(keys))
+        color_attrs = dict(zip(keys, values))
+
+    if heat_def is not None:
+
+        keys = list(sorted(set(geo[col].unique())))
+        values = sns.color_palette(heat_def, n_colors=len(keys))
+        # values = sns.color_palette("Paired", n_colors=len(keys))
+        color_attrs = dict(zip(keys, values))
+
     return color_attrs

@@ -1,6 +1,7 @@
 import systool.helpers.charts as ch
 import systool.helpers.maps as mp
 import os
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib_scalebar.scalebar import ScaleBar
 import numpy as np
@@ -160,18 +161,7 @@ def hist(what, bins=5, lwl=float('-inf'), upl=float('inf'),
 
 
 def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=False, col_pts=None,
-         col_size=3, coords=['UTMx', 'UTMy'], dir_col='DIR', join_pts=None, col_zns=None):
-
-    """
-    plota um mapa magicamente
-   •	pensar em como adapatar para ter mapa lado a lado tbm automaticamente
-   •	Adapatar para ser feito com matplot OU plotly
-
-    Returns
-    -------
-    fig: objeto do matplotlib ou plotly
-
-    """
+         col_size=3, coords=['UTMx', 'UTMy'], dir_col='DIR', join_pts=None, col_zns=None, heat=None):
 
     lines = gpd.GeoDataFrame(columns=['geometry'])
     points = gpd.GeoDataFrame(columns=['geometry'])
@@ -195,10 +185,7 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
                 zones['geometry'] = zones['geometry'].append(zones_gdf['geometry'])
             elif shape_type[0] == 'LineString' or shape_type[0] == 'MultiLineString':
                 lines_gdf = shape
-                if dir2dashed and dir_col in shape.columns:
-                    lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
-                else:
-                    lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
+                lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
 
         elif len(shape_type) == 2:
             if shape_type[0] == 'Point' and shape_type[0] == 'MultiPoint':
@@ -209,10 +196,7 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
                 zones['geometry'] = zones['geometry'].append(zones_gdf['geometry'])
             elif shape_type[0] == 'LineString' and shape_type[0] == 'MultiLineString':
                 lines_gdf = shape
-                if dir2dashed and dir_col in shape.columns:
-                    lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
-                else:
-                    lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
+                lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
 
         elif len(shape_type) > 2:
             lines_gdf = shape[(shape['geometry'].geom_type ==
@@ -220,10 +204,7 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
             points_gdf = shape[(shape['geometry'].geom_type == 'Point') | (shape['geometry'] == 'MultiPoint')].copy()
             zones_gdf = shape[(shape['geometry'].geom_type == 'Polygon') | (shape['geometry'] == 'MultiPolygon')].copy()
             points['geometry'] = points['geometry'].append(points_gdf['geometry'])
-            if dir2dashed and dir_col in shape.columns:
-                lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
-            else:
-                lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
+            lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
             zones['geometry'] = zones['geometry'].append(zones_gdf['geometry'])
 
         if dir2dashed and dir_col in shape.columns:
@@ -249,7 +230,7 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
 
     if lines is not None and len(lines) > 0:
         lines, col_lin, color = mp.group_data(lines, col_lin, 'Rotas')
-        if dir2dashed and 'DIR' in lines.columns:
+        if dir2dashed and dir_col in lines.columns:
             lines1 = lines.loc[lines[dir_col] == 1, :]
             lines2 = lines.loc[lines[dir_col] == 2, :]
             lines2plot = [lines1, lines2]
@@ -328,18 +309,18 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
 
     if zones is not None and len(zones) > 0:
         zones, col_zns, color = mp.group_data(zones, col_zns, 'Zonas')
-        color_attrs = mp.get_colors(zones, col_zns)
+        color_attrs = mp.get_colors(zones, col_zns, heat_def=heat)
         for ctype, data in zones.groupby(col_zns):
             if color is None:
                 data.plot(color=color_attrs[ctype],
                           label=ctype,
                           ax=ax,
-                          alpha=0.1, edgecolor='black')
+                          alpha=0.3, edgecolor='black')
             else:
                 data.plot(color=color,
                           label=ctype,
                           ax=ax,
-                          alpha=0.1, edgecolor='black')
+                          alpha=0.3, edgecolor='black')
 
     ax.legend(fontsize=6, loc='upper left')  # attention
     plt.axis('equal')
@@ -351,8 +332,41 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
     return fig
 
 
-gdf1 = gpd.read_file(r'C:\Users\pcardoso\Downloads\test_plotmap\line.shp')
-gdf2 = gpd.read_file(r'C:\Users\pcardoso\Downloads\test_plotmap\point.shp')
-gdf3 = gpd.read_file(r'C:\Users\pcardoso\Downloads\test_plotmap\polygon.shp')
-mapa(shapes=[gdf1, gdf2, gdf3], path=r'C:\Users\pcardoso\Downloads\test_plotmap', dir_col='dir',
-     title='banana', subtitle='nanica')
+def plot_sidemap(map_left, map_right, file_name):
+
+    dpi = 300
+
+    backend = mpl.get_backend()
+    mpl.use('agg')
+
+    c1 = map_left.canvas
+    c2 = map_right.canvas
+    c1.draw()
+    c2.draw()
+
+    a1 = np.array(c1.buffer_rgba())
+    a2 = np.array(c2.buffer_rgba())
+    a = np.hstack((a1, a2))
+
+    mpl.use(backend)
+    fig, ax = plt.subplots(figsize=(6000 / dpi, 3000 / dpi), dpi=dpi)
+    fig.subplots_adjust(0, 0, 1, 1)
+    ax.set_axis_off()
+    ax.matshow(a)
+    plt.savefig(file_name, dpi=300, bbox_inches='tight',
+                pad_inches=0.7, facecolor='#F2F2F2')
+
+    return fig
+
+
+gdf1 = gpd.read_file(r'C:\Users\pcardoso\Downloads\test_plotmap\shapes\ESTACAO_ONIBUS.shp')
+gdf2 = gpd.read_file(r'C:\Users\pcardoso\Downloads\test_plotmap\shapes\infraurbana_viario_metro.shp')
+gdf3 = gpd.read_file(r'C:\Users\pcardoso\Downloads\test_plotmap\shapes\REGIONAL.shp')
+
+map1 = mapa(shapes=[gdf1, gdf2, gdf3], path=r'C:\Users\pcardoso\Downloads\test_plotmap',
+            col_pts='black', col_lin='pink', col_zns='NOME', dir_col='Dir', dir2dashed=True,
+            title='Teste1', subtitle='Subteste1')
+map2 = mapa(shapes=[gdf1, gdf2, gdf3], path=r'C:\Users\pcardoso\Downloads\test_plotmap',
+            col_pts='TIPO', col_lin='Name', col_zns='População', heat='Blues', title='Teste2',
+            subtitle='Subteste2')
+side_map = plot_sidemap(map1, map2, r'C:\Users\pcardoso\Downloads\test_plotmap\side_map.png')
