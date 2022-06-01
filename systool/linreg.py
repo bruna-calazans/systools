@@ -21,7 +21,7 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt
 import seaborn as sns
 import warnings
-import tqdm
+from tqdm import tqdm
 
 # systool modules
 import systool.helpers.linear_regression_make as lrm
