@@ -53,14 +53,14 @@ def dataframe2numeric(df, col_dt_preffix='', col_td_preffix=''):
     # Select Cols to Convert
     if col_dt_preffix != '':
 
-        cols_dt = [col for col in all_cols if col.startswith(col_dt_preffix)]
+        cols_dt = [col for col in all_cols if str(col).startswith(col_dt_preffix)]
 
     else:
         cols_dt = []
 
     if col_td_preffix != '':
 
-        cols_td = [col for col in all_cols if col.startswith(col_td_preffix)]
+        cols_td = [col for col in all_cols if str(col).startswith(col_td_preffix)]
 
     else:
         cols_td = []

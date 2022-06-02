@@ -140,7 +140,7 @@ def get_what2plot(what, bins):
         # if gap>1:
         # needs to do this...
         what['bin_' + c] = what['bin_' + c] - 1
-        what.loc[what[c] == bins[-1], 'bin_' + c] = len(bins) - 2
+        what.loc[what[c] == bins[-1], 'bin_' + c] = len(bins) - 1
         aux = -1
 
         # garantees NaN will be cut out of bins
@@ -154,6 +154,7 @@ def get_what2plot(what, bins):
     what2plot = pd.DataFrame(data={'x_pos': list(range(0, len(bins) + aux, 1))})
     for c in cols2plot:
         df = what[['bin_' + c, 'per_' + c]].drop_duplicates()
+        df['bin_' + c] = df['bin_' + c].apply(lambda x: x - 1 if x > what2plot.shape[0] - 1 else x)
         what2plot = what2plot.merge(df, left_on='x_pos', right_on='bin_' + c, how='left').fillna(0)
     return what2plot
 
@@ -168,7 +169,7 @@ def redef_cols(what, cols_ref, legenda_txt):
         if legenda_txt is None:
             legenda_txt = cols_ref
         cols2plot = ['per_' + c for c in cols_ref]
-        what = what.rename(columns=dict(zip(cols2plot, legenda_txt)))
+        what = what.rename(columns={cols2plot[0]: legenda_txt})
         cols2plot = legenda_txt
     else:
         cols2plot = ['per_' + c for c in cols_ref]
@@ -180,9 +181,9 @@ def get_null_stat(what, legenda):
     stat = pd.DataFrame([what.isnull().sum() / len(what), what.notnull().sum() / len(what)])
     if legenda is None: 
         legenda = stat.columns
-    stat = stat.rename(columns=dict(zip(stat.columns, legenda)))
+    stat = stat.rename(columns={stat.columns[0]: legenda})
     stat = stat.T
-    stat.columns = ['Valores desconsiderados', 'Valores analisados']
+    stat.columns = ['Ignorados', 'Analisados']
     return stat
 
 
@@ -191,15 +192,15 @@ def create_figure(title, subtitle, report_nan, source, comentario):
     sns.set_palette(flatui)
     subtitle = subtitle.capitalize()
     fig = plt.figure(figsize=(14, 7))
-    fig.text(0.095, 1.05, title, fontsize=20, **{'fontname': 'Lato'})
-    fig.text(0.095, 1.0, subtitle, fontsize=14, **{'fontname': 'Lato'})
+    fig.text(0.095, 0.95, title, fontsize=20, **{'fontname': 'Lato'})
+    fig.text(0.095, 0.9, subtitle, fontsize=14, **{'fontname': 'Lato'})
     if source != '':
-        fig.text(0.095, 0, "Fonte: ", weight='bold', fontsize=12, **{'fontname': 'Lato'})
-        fig.text(0.145, 0, f"{source}", fontsize=12, **{'fontname': 'Lato'})
+        fig.text(0.095, 0.030, "Fonte: ", weight='bold', fontsize=12, **{'fontname': 'Lato'})
+        fig.text(0.145, 0.030, f"{source}", fontsize=12, **{'fontname': 'Lato'})
     else:
         pass
     if comentario != '':
-        fig.text(0.095, -0.030, f"{comentario}", fontsize=12, **{'fontname': 'Lato'})
+        fig.text(0.095, 0, f"{comentario}", fontsize=12, **{'fontname': 'Lato'})
     else:
         pass
 

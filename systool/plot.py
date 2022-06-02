@@ -59,7 +59,7 @@ def hist(what, bins=5, lwl=float('-inf'), upl=float('inf'),
         fig : Matplotlib figure type.
             Figure containing the results os the histogram plot.
 
-        """
+    """
 
     source = source
 
@@ -81,7 +81,7 @@ def hist(what, bins=5, lwl=float('-inf'), upl=float('inf'),
         stat.plot.bar(stacked=True, ax=ax2, legend=True,
                       color=['#1C1C1C', '#E6E6E6'])
         ax2.set_xticklabels(stat.index, rotation=0)
-        ax2.legend(bbox_to_anchor=(0.326, 1))
+        ax2.legend(loc='lower center')
         ch.hide_grid(ax2)
         ch.bars_auto_label(ax2, what_ticks, per, decimal=0, pos_above=True)
 
@@ -90,12 +90,13 @@ def hist(what, bins=5, lwl=float('-inf'), upl=float('inf'),
         per = True
 
         ax1.patch.set_facecolor('none')
-        ax2.patch.set_facecolor('none')
+        if ax2 is not None:
+            ax2.patch.set_facecolor('none')
         ax_aux = ax1.twinx()
 
         what.plot.bar(stacked=True, ax=ax_aux, legend=legenda)
         if xlabel is not None:
-            ax_aux.set_xlabel(xlabel, fontweight='bold', fontsize=14, color='#434853')
+            ax1.set_xlabel(xlabel, fontweight='bold', fontsize=14, color='#434853')
         ch.hide_grid(ax1)
         ch.bars_auto_label(ax_aux, what_ticks, per, decimal=1, pos_above=not legenda)
 
@@ -135,7 +136,8 @@ def hist(what, bins=5, lwl=float('-inf'), upl=float('inf'),
         per = False
 
         ax1.patch.set_facecolor('none')
-        ax2.patch.set_facecolor('none')
+        if ax2 is not None:
+            ax2.patch.set_facecolor('none')
         ax_aux = ax1.twinx()
 
         what.plot.bar(stacked=True, ax=ax_aux, legend=legenda)
@@ -161,7 +163,66 @@ def hist(what, bins=5, lwl=float('-inf'), upl=float('inf'),
 
 
 def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=False, col_pts=None,
-         col_size=3, coords=['UTMx', 'UTMy'], dir_col='DIR', join_pts=None, col_zns=None, heat=None):
+         col_size=3, coords=None, dir_col='DIR', join_pts=None, col_zns=None, heat=None):
+
+    """
+    Function used to plot maps based on multiple inputed GeoDataFrames.
+
+        Parameters
+        ----------
+        shapes: list
+            List of the GeoDataFrames that the user wants to plot.
+        path: str
+            String value with the file output path for the maps
+            ploted using this function.
+        title: str
+            Title of the map.
+        subtitle: str
+            Subtitle of the map.
+        col_lin: str
+            String value responsible for doing two different things:
+            1 - Determinate what color you want the linestrings to be.
+            or
+            2 - Determinate what GeoDataFrame column you want to be used
+        dir2dashed: bool
+            Boolean value to indicate if the analized linestrings have
+            multiple directions.
+        col_pts: str
+            String value responsible for doing two different things:
+            1 - Determinate what color you want the points to be.
+            or
+            2 - Determinate what GeoDataFrame column you want to be used
+                as categoric values for the points.
+        col_size: int
+            Determinate the size of the point ploted values.
+        coords: list
+            List of GeoDataFrame columns responsible to share the coordinates
+            of the point data that are going to be ploted if there wasn't any
+            geometry column.
+        dir_col: str
+            String value with the name of the column that have the direction
+            data.
+        join_pts: str
+            String value with the column name that the points are going to be
+            connected and become linestrings.
+        col_zns: str
+            String value responsible for doing two different things:
+            1 - Determinate what color you want the polygons to be.
+            or
+            2 - Determinate what GeoDataFrame column you want to be used
+                as categoric values for the polygons.
+        heat: str
+            String value with the seaborn color pallete used for
+            cloropletic maps. It will create a cloropletic zone
+            classification
+
+        Returns
+        -------
+
+        fig : Matplotlib figure type.
+            Figure containing the ploted map.
+
+    """
 
     lines = gpd.GeoDataFrame(columns=['geometry'])
     points = gpd.GeoDataFrame(columns=['geometry'])
@@ -259,14 +320,14 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
                 ha='center', va='center', fontsize=20,
                 xycoords=ax.transAxes)
 
-    def corresp(x):
-        if x == 1:
+    def corresp(var):
+        if var == 1:
             return 3
-        if x == 2:
+        if var == 2:
             return 20
-        if x == 3:
+        if var == 3:
             return 40
-        if x == 4:
+        if var == 4:
             return 100
         else:
             return 0
@@ -332,7 +393,30 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
     return fig
 
 
-def plot_sidemap(map_left, map_right, file_name):
+def plot_sidemap(map_left, map_right, file_name=None):
+
+    """
+    Function that is responsible for plot two early created maps side by side.
+
+        Parameters
+        ----------
+        map_left: Matplotlib figure type
+            Figure of the map you want to be plotted on the left
+            side of the new figure.
+        map_right: Matplotlib figure type
+            Figure of the map you want to be plotted on the right
+            side of the new figure.
+        file_name: str
+            String value with the path and file name of the exported
+            new figure.
+
+        Returns
+        -------
+
+        fig : Matplotlib figure type.
+            Figure containing the two ploted maps, side by side.
+
+    """
 
     dpi = 300
 
@@ -353,20 +437,8 @@ def plot_sidemap(map_left, map_right, file_name):
     fig.subplots_adjust(0, 0, 1, 1)
     ax.set_axis_off()
     ax.matshow(a)
-    plt.savefig(file_name, dpi=300, bbox_inches='tight',
-                pad_inches=0.7, facecolor='#F2F2F2')
+    if file_name is not None:
+        plt.savefig(file_name, dpi=300, bbox_inches='tight',
+                    pad_inches=0.7, facecolor='#F2F2F2')
 
     return fig
-
-
-gdf1 = gpd.read_file(r'C:\Users\pcardoso\Downloads\test_plotmap\shapes\ESTACAO_ONIBUS.shp')
-gdf2 = gpd.read_file(r'C:\Users\pcardoso\Downloads\test_plotmap\shapes\infraurbana_viario_metro.shp')
-gdf3 = gpd.read_file(r'C:\Users\pcardoso\Downloads\test_plotmap\shapes\REGIONAL.shp')
-
-map1 = mapa(shapes=[gdf1, gdf2, gdf3], path=r'C:\Users\pcardoso\Downloads\test_plotmap',
-            col_pts='black', col_lin='pink', col_zns='NOME', dir_col='Dir', dir2dashed=True,
-            title='Teste1', subtitle='Subteste1')
-map2 = mapa(shapes=[gdf1, gdf2, gdf3], path=r'C:\Users\pcardoso\Downloads\test_plotmap',
-            col_pts='TIPO', col_lin='Name', col_zns='População', heat='Blues', title='Teste2',
-            subtitle='Subteste2')
-side_map = plot_sidemap(map1, map2, r'C:\Users\pcardoso\Downloads\test_plotmap\side_map.png')

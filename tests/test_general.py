@@ -1,4 +1,5 @@
-from tests import data_tp
+import data_tp
+import plot_tp
 
 
 def test_data_dataframe2numeric():
@@ -27,3 +28,7 @@ def test_data_flattenhierarchicalcol():
 
 def test_getmaskisin():
     return data_tp.getmaskisin_tp()
+
+
+def test_hist():
+    return plot_tp.hist_tp()
