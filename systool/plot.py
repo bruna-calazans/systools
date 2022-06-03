@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 from matplotlib_scalebar.scalebar import ScaleBar
 import numpy as np
 import geopandas as gpd
-from shapely.geometry import LineString
 
 
 def hist(what, bins=5, lwl=float('-inf'), upl=float('inf'),
@@ -163,7 +162,7 @@ def hist(what, bins=5, lwl=float('-inf'), upl=float('inf'),
 
 
 def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=False, col_pts=None,
-         col_size=3, coords=None, dir_col='DIR', join_pts=None, col_zns=None, heat=None):
+         col_size=3, coords=None, dir_col='DIR', col_zns=None, heat=None):
 
     """
     Function used to plot maps based on multiple inputed GeoDataFrames.
@@ -193,7 +192,7 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
             or
             2 - Determinate what GeoDataFrame column you want to be used
                 as categoric values for the points.
-        col_size: int
+        col_size: int or str
             Determinate the size of the point ploted values.
         coords: list
             List of GeoDataFrame columns responsible to share the coordinates
@@ -202,9 +201,6 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
         dir_col: str
             String value with the name of the column that have the direction
             data.
-        join_pts: str
-            String value with the column name that the points are going to be
-            connected and become linestrings.
         col_zns: str
             String value responsible for doing two different things:
             1 - Determinate what color you want the polygons to be.
@@ -224,6 +220,9 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
 
     """
 
+    lines_plot = gpd.GeoDataFrame(columns=['geometry'])
+    points_plot = gpd.GeoDataFrame(columns=['geometry'])
+    zones_plot = gpd.GeoDataFrame(columns=['geometry'])
     lines = gpd.GeoDataFrame(columns=['geometry'])
     points = gpd.GeoDataFrame(columns=['geometry'])
     zones = gpd.GeoDataFrame(columns=['geometry'])
@@ -232,56 +231,92 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
 
         if 'geometry' not in shape.columns:
             points_gdf = mp.config_crs(shape, coords)
-            points['geometry'] = points['geometry'].append(points_gdf['geometry'])
+            points_gdf = points_gdf.set_crs('epsg:4674', allow_override=True)
+            points_plot = points_plot.append(points_gdf, ignore_index=True)
+            points_plot = gpd.GeoDataFrame(points_plot['geometry'])
+            shape_type = points_plot['geometry'].geom_type.to_list()
+            shape_type = list(set(shape_type))
+            shape = points_gdf.copy()
 
-        shape_type = shape['geometry'].geom_type.to_list()
-        shape_type = list(set(shape_type))
+        if 'geometry' in shape.columns:
+            shape_type = shape['geometry'].geom_type.to_list()
+            shape_type = list(set(shape_type))
 
-        if len(shape_type) == 1:
-            if shape_type[0] == 'Point' or shape_type[0] == 'MultiPoint':
-                points_gdf = shape
-                points['geometry'] = points['geometry'].append(points_gdf['geometry'])
-            elif shape_type[0] == 'Polygon' or shape_type[0] == 'MultiPolygon':
-                zones_gdf = shape
-                zones['geometry'] = zones['geometry'].append(zones_gdf['geometry'])
-            elif shape_type[0] == 'LineString' or shape_type[0] == 'MultiLineString':
-                lines_gdf = shape
-                lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
+            if len(shape_type) == 1:
+                if shape_type[0] == 'Point' or shape_type[0] == 'MultiPoint':
+                    points_gdf = shape
+                    points_gdf = points_gdf.set_crs('epsg:4674', allow_override=True)
+                    points_plot = points.append(points_gdf, ignore_index=True)
+                    points_plot = gpd.GeoDataFrame(points_plot['geometry'])
+                elif shape_type[0] == 'Polygon' or shape_type[0] == 'MultiPolygon':
+                    zones_gdf = shape
+                    zones_gdf = zones_gdf.set_crs('epsg:4674', allow_override=True)
+                    zones_plot = zones_plot.append(zones_gdf, ignore_index=True)
+                    zones_plot = gpd.GeoDataFrame(zones_plot['geometry'])
+                elif shape_type[0] == 'LineString' or shape_type[0] == 'MultiLineString':
+                    lines_gdf = shape
+                    lines_gdf = lines_gdf.set_crs('epsg:4674', allow_override=True)
+                    lines_plot = lines_plot.append(lines_gdf, ignore_index=True)
+                    lines_plot = gpd.GeoDataFrame(lines_plot['geometry'])
 
-        elif len(shape_type) == 2:
-            if shape_type[0] == 'Point' and shape_type[0] == 'MultiPoint':
-                points_gdf = shape
-                points['geometry'] = points['geometry'].append(points_gdf['geometry'])
-            elif shape_type[0] == 'Polygon' and shape_type[0] == 'MultiPolygon':
-                zones_gdf = shape
-                zones['geometry'] = zones['geometry'].append(zones_gdf['geometry'])
-            elif shape_type[0] == 'LineString' and shape_type[0] == 'MultiLineString':
-                lines_gdf = shape
-                lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
+            elif len(shape_type) == 2:
+                if shape_type[0] == 'Point' and shape_type[0] == 'MultiPoint':
+                    points_gdf = shape
+                    points_gdf = points_gdf.set_crs('epsg:4674', allow_override=True)
+                    points_plot = points.append(points_gdf, ignore_index=True)
+                    points_plot = gpd.GeoDataFrame(points_plot['geometry'])
+                elif shape_type[0] == 'Polygon' and shape_type[0] == 'MultiPolygon':
+                    zones_gdf = shape
+                    zones_gdf = zones_gdf.set_crs('epsg:4674', allow_override=True)
+                    zones_plot = zones_plot.append(zones_gdf, ignore_index=True)
+                    zones_plot = gpd.GeoDataFrame(zones_plot['geometry'])
+                elif shape_type[0] == 'LineString' and shape_type[0] == 'MultiLineString':
+                    lines_gdf = shape
+                    lines_gdf = lines_gdf.set_crs('epsg:4674', allow_override=True)
+                    lines_plot = lines_plot.append(lines_gdf, ignore_index=True)
+                    lines_plot = gpd.GeoDataFrame(lines_plot['geometry'])
 
-        elif len(shape_type) > 2:
-            lines_gdf = shape[(shape['geometry'].geom_type ==
-                               'LineString') | (shape['geometry'] == 'MultiLineString')].copy()
-            points_gdf = shape[(shape['geometry'].geom_type == 'Point') | (shape['geometry'] == 'MultiPoint')].copy()
-            zones_gdf = shape[(shape['geometry'].geom_type == 'Polygon') | (shape['geometry'] == 'MultiPolygon')].copy()
-            points['geometry'] = points['geometry'].append(points_gdf['geometry'])
-            lines['geometry'] = lines['geometry'].append(lines_gdf['geometry'])
-            zones['geometry'] = zones['geometry'].append(zones_gdf['geometry'])
+            elif len(shape_type) > 2:
+                lines_gdf = shape[(shape['geometry'].geom_type ==
+                                   'LineString') | (shape['geometry'] == 'MultiLineString')].copy()
+                points_gdf = shape[(shape['geometry'].geom_type == 'Point') |
+                                   (shape['geometry'] == 'MultiPoint')].copy()
+                zones_gdf = shape[(shape['geometry'].geom_type == 'Polygon') |
+                                  (shape['geometry'] == 'MultiPolygon')].copy()
+                points_gdf = points_gdf.set_crs('epsg:4674', allow_override=True)
+                zones_gdf = zones_gdf.set_crs('epsg:4674', allow_override=True)
+                lines_gdf = lines_gdf.set_crs('epsg:4674', allow_override=True)
+                points_plot = points.append(points_gdf, ignore_index=True)
+                points_plot = gpd.GeoDataFrame(points_plot['geometry'])
+                lines_plot = lines_plot.append(lines_gdf, ignore_index=True)
+                lines_plot = gpd.GeoDataFrame(lines_plot['geometry'])
+                zones_plot = zones_plot.append(zones_gdf, ignore_index=True)
+                zones_plot = gpd.GeoDataFrame(zones_plot['geometry'])
 
         if dir2dashed and dir_col in shape.columns:
-            lines = lines.merge(shape[['geometry', dir_col]], how='right', left_on='geometry', right_on='geometry')
+            lines_plot = lines_plot.merge(shape[['geometry', dir_col]], how='right', left_on='geometry',
+                                          right_on='geometry')
+            lines = lines.append(lines_plot)
         if col_pts in shape.columns and (shape_type[0] == 'Point' or shape_type[0] == 'MultiPoint'):
-            points = points.merge(shape[['geometry', col_pts]], how='right', left_on='geometry', right_on='geometry')
+            points_plot = points_plot.merge(shape[['geometry', col_pts]], how='right', left_on='geometry',
+                                            right_on='geometry')
+            points = points.append(points_plot)
         if col_lin in shape.columns and (shape_type[0] == 'LineString' or shape_type[0] == 'MultiLineString'):
-            lines = lines.merge(shape[['geometry', col_lin]], how='right', left_on='geometry', right_on='geometry')
+            lines_plot = lines_plot.merge(shape[['geometry', col_lin]], how='right', left_on='geometry',
+                                          right_on='geometry')
+            lines = lines.append(lines_plot)
         if col_zns in shape.columns and (shape_type[0] == 'Polygon' or shape_type[0] == 'MultiPolygon'):
-            zones = zones.merge(shape[['geometry', col_zns]], how='right', left_on='geometry', right_on='geometry')
+            zones_plot = zones_plot.merge(shape[['geometry', col_zns]], how='right', left_on='geometry',
+                                          right_on='geometry')
+            zones = zones.append(zones_plot)
+        if col_size in shape.columns and (shape_type[0] == 'Point' or shape_type[0] == 'MultiPoint'):
+            points_plot = points_plot.merge(shape[['geometry', col_size]], how='right', left_on='geometry',
+                                            right_on='geometry')
+            points = points.append(points_plot)
 
-    if join_pts is not None:
-        points2line = points.groupby(join_pts)['geometry'].apply(lambda x: LineString(x.tolist()))
-        points2line = gpd.GeoDataFrame(points2line, geometry='geometry')
-        zoom = lines['geometry'].append(points2line['geometry'])
-        zoom.crs = lines.crs
+    points.dropna(inplace=True)
+    lines.dropna(inplace=True)
+    zones.dropna(inplace=True)
 
     fig, ax = plt.subplots(figsize=(8, 8), dpi=150)
     fig.suptitle(f'{title}\n{subtitle}', fontsize=20, ha='left', va='center', x=0.125, y=0.95, **{'fontname': 'Lato'})
@@ -305,12 +340,14 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
                     data.plot(color=color_attrs[ctype],
                               label=ctype,
                               ax=ax,
-                              linewidth=1, linestyle='-' * (i + 1))
+                              linewidth=1, linestyle='-' * (i + 1),
+                              aspect='equal')
                 else:
                     data.plot(color=color,
                               label=ctype,
                               ax=ax,
-                              linewidth=1, linestyle='-' * (i + 1))
+                              linewidth=1, linestyle='-' * (i + 1),
+                              aspect='equal')
 
     plt.setp(ax.get_xticklabels(), visible=False)
     plt.setp(ax.get_yticklabels(), visible=False)
@@ -350,23 +387,27 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
                         data2.plot(color=color_attrs[ctype],
                                    label=ctype + labels[size - 1],
                                    ax=ax,
-                                   markersize=corresp(size))
+                                   markersize=corresp(size),
+                                   aspect='equal')
                     else:
                         data2.plot(color=color,
                                    label=ctype + labels[size - 1],
                                    ax=ax,
-                                   markersize=corresp(size))
+                                   markersize=corresp(size),
+                                   aspect='equal')
             else:
                 if color is None:
                     data.plot(color=color_attrs[ctype],
                               label=ctype,
                               ax=ax, zorder=10,
-                              markersize=col_size)
+                              markersize=col_size,
+                              aspect='equal')
                 else:
                     data.plot(color=color,
                               label=ctype,
                               ax=ax, zorder=10,
-                              markersize=col_size)
+                              markersize=col_size,
+                              aspect='equal')
 
     if zones is not None and len(zones) > 0:
         zones, col_zns, color = mp.group_data(zones, col_zns, 'Zonas')
@@ -376,12 +417,14 @@ def mapa(shapes, path=None, title='', subtitle='', col_lin=None, dir2dashed=Fals
                 data.plot(color=color_attrs[ctype],
                           label=ctype,
                           ax=ax,
-                          alpha=0.3, edgecolor='black')
+                          alpha=0.3, edgecolor='black',
+                          aspect='equal')
             else:
                 data.plot(color=color,
                           label=ctype,
                           ax=ax,
-                          alpha=0.3, edgecolor='black')
+                          alpha=0.3, edgecolor='black',
+                          aspect='equal')
 
     ax.legend(fontsize=6, loc='upper left')  # attention
     plt.axis('equal')

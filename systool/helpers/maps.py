@@ -5,11 +5,9 @@ import seaborn as sns
 
 def config_crs(geo, aux=None):
     if not (isinstance(geo, gpd.GeoDataFrame)):
-        geometry = [Point(xy) for xy in zip(geo[aux[0]], geo[aux[1]])]
+        geometry = [Point(xy) for xy in zip(geo[aux[1]], geo[aux[0]])]
         geo = geo.drop(aux, axis=1)
         geo = gpd.GeoDataFrame(geo, geometry=geometry)
-    geo.crs = "+proj=utm +zone=23 +ellps=WGS84 +datum=WGS84 +units=m +no_defs +south"
-    geo = geo.to_crs("EPSG:3857")  # need to convert to WEB-UTM
     return geo
 
 

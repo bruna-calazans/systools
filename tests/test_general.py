@@ -32,3 +32,7 @@ def test_getmaskisin():
 
 def test_hist():
     return plot_tp.hist_tp()
+
+
+def test_mapa():
+    return plot_tp.mapa_tp()
