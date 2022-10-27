@@ -1,7 +1,8 @@
 def hist_tp():
+
     import os
     import pandas as pd
-    from systool import plot
+    import main.systool.plot as plot
 
     file_path = os.path.dirname(os.path.abspath(__file__))
     df = pd.read_csv(os.path.join(file_path, r'test_databases\test_plot.csv'), encoding='latin1', sep=';')
@@ -17,10 +18,11 @@ def hist_tp():
 
 
 def mapa_tp():
+
     import os
     import pandas as pd
     import geopandas as gpd
-    from systool import plot
+    import main.systool.plot as plot
 
     title = 'Linha de Metrô e Terminais de Ônibus'
 
@@ -35,3 +37,30 @@ def mapa_tp():
               col_size='COUNT_FIG', dir2dashed=True, dir_col='dir')
 
     assert os.path.exists(rf'test_outputs\chart_{title}.png')
+
+
+def plotsidemap_tp():
+
+    import os
+    import pandas as pd
+    import geopandas as gpd
+    import main.systool.plot as plot
+
+    title = 'Linha de Metrô e Terminais de Ônibus - Sidemap'
+
+    file_path = os.path.dirname(os.path.abspath(__file__))
+    gdf_metro_lines = gpd.read_file(os.path.join(file_path, r'test_databases\infraurbana_viario_metro.shp'))
+    gdf_bus_stations = gpd.read_file(os.path.join(file_path, r'test_databases\ESTACAO_ONIBUS.shp'))
+    gdf_bh_regions = gpd.read_file(os.path.join(file_path, r'test_databases\REGIONAL.shp'))
+    gdf_metro_station = pd.read_csv(os.path.join(file_path, r'test_databases\ESTACAO_METRO.csv'), sep=';')
+    left = plot.mapa(shapes=[gdf_bh_regions, gdf_bus_stations, gdf_metro_lines, gdf_metro_station],
+                     coords=['LAT', 'LON'], col_pts='blue', col_lin='Name', col_zns='POPULAÇÃO', heat='Blues',
+                     title=title, subtitle='Por População Regional', col_size='COUNT_FIG', dir2dashed=True,
+                     dir_col='dir')
+    right = plot.mapa(shapes=[gdf_bh_regions, gdf_bus_stations, gdf_metro_lines, gdf_metro_station],
+                      coords=['LAT', 'LON'], col_pts='blue', col_lin='Name', col_zns='POPULAÇÃO', heat='Oranges',
+                      title=title, subtitle='Por População Regional', col_size='COUNT_FIG', dir2dashed=True,
+                      dir_col='dir')
+    plot.plot_sidemap(left, right, os.path.join(file_path, rf'test_outputs\{title}.png'))
+
+    assert os.path.exists(rf'test_outputs\{title}.png')

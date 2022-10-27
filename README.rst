@@ -1,19 +1,22 @@
-# SysTools v.0.0.10
+# SysTool v.0.03.00
 
 Reune funções úteis para o tratamento e visualização de dados. 
 Uso particular em Engenharia de Transportes.
 
-UPDATE
-------
+Módulos já utilizáveis:
 
-Module st.data is now available for use!
+- systool.data
+    - Módulo de input e tratamento de dados relacionados à Engenharia de Transportes.
+- systool.plot
+    - Módulo de plot de gráficos e mapas relacionados à Engenharia de Transportes.
+- systool.linreg
+    - Módulo de cálculo e plot de regressões lineares relacionadas à Engenharia de Transportes.
+- systool.distribution
+    - Módulo de cálculo de distribuições matriciais relacionadas ao Modelo 4 Etapas de Engenharia de Transportes.
 
-The module st.data have been released, all the functions
-associated with DataFrame manipulation, load and export, filters
-and slasher are now within the module.
+Instalação:
 
-The module already have an Jupyter Notebook with examples of each
-usage of the new functions, inside the examples folder. If you're 
-a bit insecure about using this functions on your Python Project,
-try to run the Notebook and follow the instructions to understand
-better how each function work.
+Para a utilização desse módulo, se você usa Linux basta realizar: python3 pip install systool.
+Se você utiliza windows, necessita instalar o Geopandas através do Anaconda, como indicado no link a seguir: 
+https://towardsdatascience.com/geopandas-installation-the-easy-way-for-windows-31a666b3610f, após isso, 
+basta realizar pip install systool e já poderá utilizar o módulo.

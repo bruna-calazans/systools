@@ -1,7 +1,9 @@
 def dataframe2numeric_tp():
+
     import os
     import pandas as pd
-    from systool import data
+    import main.systool.data as data
+
     file_path = os.path.dirname(os.path.abspath(__file__))
     df = pd.read_csv(os.path.join(file_path, r'test_databases\test_dataframe2numeric.csv'))
     if df.shape[1] == 1:
@@ -36,8 +38,10 @@ def dataframe2numeric_tp():
 
 
 def openfile_tp():
+
     import os
-    from systool import data
+    import main.systool.data as data
+
     file_path = os.path.dirname(os.path.abspath(__file__))
     df1 = data.open_file(file_path, r'test_databases\test_openfile.csv', usa=True)
     df2 = data.open_file(file_path, r'test_databases\test_openfile.xlsx', usa=True)
@@ -52,9 +56,11 @@ def openfile_tp():
 
 
 def savefile_tp():
+
     import os
     import geopandas as gpd
-    from systool import data
+    import main.systool.data as data
+
     file_path = os.path.dirname(os.path.abspath(__file__))
     geodf = gpd.read_file(os.path.join(file_path, r'test_databases\test_openfile.shp'))
     df = geodf.iloc[:, :-1]
@@ -75,9 +81,10 @@ def savefile_tp():
 
 
 def getcols_tp():
+
     import os
     import pandas as pd
-    from systool import data
+    import main.systool.data as data
 
     file_path = os.path.dirname(os.path.abspath(__file__))
     right = pd.read_excel(os.path.join(file_path, r'test_databases\test_getcols_right.xlsx'), sheet_name='Sheet1')
@@ -90,9 +97,10 @@ def getcols_tp():
 
 
 def getmaskisin_tp():
+
     import os
     import pandas as pd
-    from systool import data
+    import main.systool.data as data
 
     file_path = os.path.dirname(os.path.abspath(__file__))
     df = pd.read_excel(os.path.join(file_path, r'test_databases\test_getmaskisin.xlsx'),
@@ -105,9 +113,10 @@ def getmaskisin_tp():
 
 
 def removeduplicatessafe_tp():
+
     import os
     import pandas as pd
-    from systool import data
+    import main.systool.data as data
 
     file_path = os.path.dirname(os.path.abspath(__file__))
     df = pd.read_excel(os.path.join(file_path, r'test_databases\test_removeduplicatessafe.xlsx'), sheet_name='Sheet1')
@@ -121,9 +130,10 @@ def removeduplicatessafe_tp():
 
 
 def flattenhierarchicalcol_tp():
+
     import os
     import pandas as pd
-    from systool import data
+    import main.systool.data as data
 
     file_path = os.path.dirname(os.path.abspath(__file__))
     df = pd.read_excel(os.path.join(file_path, r'test_databases\test_flattenhierarchical_col.xlsx'),
