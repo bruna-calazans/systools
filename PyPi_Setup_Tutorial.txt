@@ -1,0 +1,17 @@
+Passos-Pip:
+
+1 - Pip install setuptools.
+
+2 - Entrar na pasta do projeto na instância mais externa.
+
+3 - Editar o setup.py com as informações do projeto.
+
+4 - Rodar no terminal dentro da pasta do projeto "python setup.py sdist bdist_wheel".
+
+5 - Usar pip install twine.
+
+6 - Rodar no terminal dentro da pasta do projeto "twine upload dist/*"
+
+7 - Digitar usuário e senha do pypi.
+
+8 - Testar.
