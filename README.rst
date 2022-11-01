@@ -1,4 +1,4 @@
-# SysTool v.0.03.00
+# SysTool v.0.04.00
 
 Reune funções úteis para o tratamento e visualização de dados. 
 Uso particular em Engenharia de Transportes.
@@ -17,6 +17,12 @@ Módulos já utilizáveis:
 Instalação:
 
 Para a utilização desse módulo, se você usa Linux basta realizar: python3 pip install systool.
-Se você utiliza windows, necessita instalar o Geopandas através do Anaconda, como indicado no link a seguir: 
-https://towardsdatascience.com/geopandas-installation-the-easy-way-for-windows-31a666b3610f, após isso, 
-basta realizar pip install systool e já poderá utilizar o módulo.
+Se você utiliza windows, necessita instalar o Geopandas através do Anaconda, para isso, siga os passos abaixo:
+1 - Acesse o site https://www.anaconda.com/products/distribution e faça o download da distribuição.
+2 - Faça a instalação.
+3 - Abra o Anaconda Prompt e crie um environment através de "conda create -n NomeDoSeuEnvAqui".
+4 - Ative o environment com "conda activate NomeDoSeuEnvAqui".
+5 - Use o comando "pip install systool".
+6 - Pode utilizar o complemento agora a vontade!
+
+Obs: Lembre de sempre ativar o ambiente antes de usar...

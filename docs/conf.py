@@ -12,14 +12,14 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath(r'../main'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'sysgadgets'
-copyright = '2022, bcalanzans & pcardoso (MoleDownTheHole)'
-author = 'bcalanzans & pcardoso (MoleDownTheHole)'
+project = 'Systool'
+copyright = '2022, bcalazans & pcardoso'
+author = 'bcalazans & pcardoso'
 
 
 # -- General configuration ---------------------------------------------------
@@ -27,7 +27,7 @@ author = 'bcalanzans & pcardoso (MoleDownTheHole)'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

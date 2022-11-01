@@ -1,0 +1,755 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>systool package &#8212; Systool  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="main" href="modules.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="main"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Systool  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" accesskey="U">main</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">systool package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="systool-package">
+<h1>systool package<a class="headerlink" href="#systool-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-systool.data">
+<span id="systool-data-module"></span><h2>systool.data module<a class="headerlink" href="#module-systool.data" title="Permalink to this headline">¶</a></h2>
+<p>Created on Tue Apr 12 10:28:14 2022</p>
+<p>&#64;author: bcalazans &amp; MoleDownTheHole (pcardoso)</p>
+<p>Módulo com funções úteis no tratamento de dados tabulados.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.data.dataframe2numeric">
+<span class="sig-prename descclassname"><span class="pre">systool.data.</span></span><span class="sig-name descname"><span class="pre">dataframe2numeric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_dt_preffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_td_preffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.data.dataframe2numeric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format the DataFrame columns to Numeric and Time Formats.
+Support datetime, timestamp, int and float formats.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – DataFrame type variable that has columns who will be converted
+to numeric or time format.</p></li>
+<li><p><strong>col_dt_preffix</strong> (<em>string</em><em>, </em><em>optional</em>) – String type variable that have the prefixes used to show that
+the designated column title that contains it,
+must be converted to datetime type.</p></li>
+<li><p><strong>col_td_preffix</strong> (<em>string</em><em>, </em><em>optional</em>) – String type variable that have the prefixes used to show that
+the designated column title that contains it,
+must be converted to timedelta type.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>)</p></li>
+<li><p><em>DataFrame used in the input, but with the numeric and time columns converted.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.data.flatten_hierarchical_col">
+<span class="sig-prename descclassname"><span class="pre">systool.data.</span></span><span class="sig-name descname"><span class="pre">flatten_hierarchical_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'_'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.data.flatten_hierarchical_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn multi-index column names into single index
+separated by ‘_’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>col</strong> (<em>Multi-Index Column Title</em>) – Multi-Index column that will be replaced for a single_index column.</p></li>
+<li><p><strong>sep</strong> (<em>String</em><em>, </em><em>optional</em>) – Separator for the single_index column name.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>new_col</strong> – Multi_Index column title passed in the parameters, but flattened
+as no hierarchical title.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Single_Index Column Title</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.data.get_col">
+<span class="sig-prename descclassname"><span class="pre">systool.data.</span></span><span class="sig-name descname"><span class="pre">get_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.data.get_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add columns to an input DataFrame, originated from another DataFrame
+based on a merge correspondence with in common column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – Main input dataframe that will receive the merged columns.</p></li>
+<li><p><strong>get_cols</strong> (<em>List</em>) – Columns from the other input dataframe you want to merge.</p></li>
+<li><p><strong>from_df</strong> (<em>DataFrame</em>) – Secondary input dataframe that will be used to get the
+columns to be merged.</p></li>
+<li><p><strong>key</strong> (<em>String</em>) – Column in main DataFrame used as key to merge the two DataFrames.</p></li>
+<li><p><strong>key2</strong> (<em>String</em><em>, </em><em>optional</em>) – Column in secondary DataFrame used as key to merge the two DataFrames.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>ans</strong> – Main input DataFrame with the merged columns.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.data.get_mask_isin">
+<span class="sig-prename descclassname"><span class="pre">systool.data.</span></span><span class="sig-name descname"><span class="pre">get_mask_isin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.data.get_mask_isin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a filter mask to be used in a DataFrame based on
+single ou multiple filter.
+(Easier than the usual way)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – DataFrame that the user want to create a mask.</p></li>
+<li><p><strong>key</strong> (<em>String</em><em> or </em><em>List</em>) – The column, or columns, that the filter will be applied.</p></li>
+<li><p><strong>base_data</strong> (<em>List and Tuple</em>) – List filled with tuples that each one represents one filter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>mask</strong> – A Series of Boolean values that can be used as a mask for
+the input DataFrame.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Series</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.data.open_file">
+<span class="sig-prename descclassname"><span class="pre">systool.data.</span></span><span class="sig-name descname"><span class="pre">open_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_td_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gap'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_dt_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'H_'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.data.open_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open file as a DataFrame.
+Support csv, txt, parquet, excel and shape.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>string</em>) – Path of the file, may include the file name with extension.
+If the file is zipped, pass the path with the zip extension.</p></li>
+<li><p><strong>name</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of the file with extension to be open.
+Expects that the name was passed on the path arg.</p></li>
+<li><p><strong>expected_cols</strong> (<em>list</em><em>, </em><em>optional</em>) – Import only this cols.</p></li>
+<li><p><strong>usa</strong> (<em>Bool</em><em>, </em><em>optional</em>) – If TRUE expects comma separator and point as decimal indicator.
+If FALSE expects ; as separator and comma as decimal indicator.</p></li>
+<li><p><strong>col_dt_prefix</strong> (<em>String</em><em>, </em><em>optional</em>) – Indicates column name prefix to be converted to datetime.</p></li>
+<li><p><strong>col_td_prefix</strong> (<em>String</em><em>, </em><em>optional</em>) – Indicates column name prefix to be converted to timedelta.</p></li>
+<li><p><strong>**kwargs</strong> (<em>dict</em>) – Any argument for the original read functions from (geo)pandas.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>df</strong> – DataFrame do arquivo lido contendo ou não geometria.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame or geo.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.data.remove_duplicate_safe">
+<span class="sig-prename descclassname"><span class="pre">systool.data.</span></span><span class="sig-name descname"><span class="pre">remove_duplicate_safe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.data.remove_duplicate_safe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove DataFrame duplicates based on a column,
+or multiple columns, value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – Dataframe that the user want to drop duplicates.</p></li>
+<li><p><strong>cols</strong> (<em>String</em><em> or </em><em>List</em>) – Column or list of columns used as parameter for
+the drop_duplicates function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>df</strong> – DataFrame without the duplicates in cols parameter.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.data.save_file">
+<span class="sig-prename descclassname"><span class="pre">systool.data.</span></span><span class="sig-name descname"><span class="pre">save_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sheet_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Sheet1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_row</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">truncate_sheet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.data.save_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save DataFrame to an exterior file created and formated based
+on various parameters.
+Support csv, txt, parquet, excel and shape.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – DataFrame type variable that has columns who the user
+wants to export.</p></li>
+<li><p><strong>path</strong> (<em>String</em>) – Path of the file.
+Doesn’t need to have the filename and extension included.</p></li>
+<li><p><strong>name</strong> (<em>String</em><em>, </em><em>optional</em>) – File name.
+Doesn’t need to have the extension included.</p></li>
+<li><p><strong>usa</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – True -&gt; The exported file uses the american format.
+(Ex: Comma as separator, dot as decimal…)
+False -&gt; The exported file doesn’t uses the american format.
+(Ex: Semicolon as separator, comma as decimal…)</p></li>
+<li><p><strong>ext</strong> (<em>String</em><em>, </em><em>optional</em>) – The file extension.
+Must be csv, txt, parquet, excel or shape.</p></li>
+<li><p><strong>sheet_name</strong> (<em>String</em><em>, </em><em>optional</em>) – The file, when saved as an excel file, sheet name.</p></li>
+<li><p><strong>start_row</strong> (<em>Integer</em><em>, </em><em>optional</em>) – The excel file row where the user wants the new data to be inserted.</p></li>
+<li><p><strong>truncate_sheet</strong> (<em>Boolean</em><em>, </em><em>optional</em>) – Remove and recreate the destination sheet of the exported excel file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-systool.distribution">
+<span id="systool-distribution-module"></span><h2>systool.distribution module<a class="headerlink" href="#module-systool.distribution" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.distribution.calc_doubly_constrained">
+<span class="sig-prename descclassname"><span class="pre">systool.distribution.</span></span><span class="sig-name descname"><span class="pre">calc_doubly_constrained</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prod_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.distribution.calc_doubly_constrained" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates doubly constrained trip distribution for a given friction factor matrix
+prod_a = Production array
+attr_a = attr_action array
+f = Friction factor matrix
+max_iter (optional) = maximum iterations, default is 10
+Returns trip table</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.distribution.calc_fratar">
+<span class="sig-prename descclassname"><span class="pre">systool.distribution.</span></span><span class="sig-name descname"><span class="pre">calc_fratar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prod_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trips_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_balance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.distribution.calc_fratar" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Calculates fratar trip distribution</dt><dd><p>prod_a = Production target as array
+attr_a = attr_action target as array
+trips_1 = Seed trip table for fratar
+max_iter (optional) = maximum iterations, default is 10
+Returns fratared trip table</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.distribution.calc_multi_distribute">
+<span class="sig-prename descclassname"><span class="pre">systool.distribution.</span></span><span class="sig-name descname"><span class="pre">calc_multi_distribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prods</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fric_matrices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.distribution.calc_multi_distribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>prods = List of Production attributes
+attr  = attr_action attribute
+fric_matrices = N-Dim array of friction matrices corresponding to prod_atts –&gt;
+(numFrictionMats, num_zones, num_zones)
+max_iter (optional) = Maximum number of balancing iterations, default is 10
+Returns N-Dim array of trip matrices corresponding to each production segment</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.distribution.calc_multi_fratar">
+<span class="sig-prename descclassname"><span class="pre">systool.distribution.</span></span><span class="sig-name descname"><span class="pre">calc_multi_fratar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prods</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trip_matrices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.distribution.calc_multi_fratar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies fratar model to given set of trip matrices with target productions and one attr_action vector
+prods = Array of Productions (n production segments)
+attr_att = Array of attr_action ( 1 attr_action segment)
+trip_matrices = N-Dim array of seed trip matrices corresponding to prod_atts</p>
+<blockquote>
+<div><p>–&gt; (num_trip_mats, num_zones, num_zones)</p>
+</div></blockquote>
+<p>max_iter = Maximum number of iterations
+version 1.0</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.distribution.calc_singly_constrained">
+<span class="sig-prename descclassname"><span class="pre">systool.distribution.</span></span><span class="sig-name descname"><span class="pre">calc_singly_constrained</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prod_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr_a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.distribution.calc_singly_constrained" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates singly constrained trip distribution for a given friction factor matrix
+prod_a = Production array
+attr_a = attr_action array
+f = Friction factor matrix
+Resutrns trip table</p>
+</dd></dl>
+
+</section>
+<section id="module-systool.geo">
+<span id="systool-geo-module"></span><h2>systool.geo module<a class="headerlink" href="#module-systool.geo" title="Permalink to this headline">¶</a></h2>
+<p>Created on Tue Apr 12 10:28:14 2022</p>
+<p>&#64;author: bcalazans &amp; MoleDownTheHole (pcardoso)</p>
+<p>Módulo com funções úteis no tratamento de dados tabulados.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.geo.calc_dist_euclidean">
+<span class="sig-prename descclassname"><span class="pre">systool.geo.</span></span><span class="sig-name descname"><span class="pre">calc_dist_euclidean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.geo.calc_dist_euclidean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the euclidean distances between given coordinates of a Dataframe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – DataFrame containing the coordinates.</p></li>
+<li><p><strong>x1</strong> (<em>String</em>) – Dataframe column name with the
+origin Longitudes.</p></li>
+<li><p><strong>x2</strong> (<em>String</em>) – Dataframe column name with the
+destination Longitudes.</p></li>
+<li><p><strong>y1</strong> (<em>String</em>) – Dataframe column name with the
+origin Latitudes.</p></li>
+<li><p><strong>y2</strong> (<em>String</em>) – Dataframe column name with the
+destination Latitudes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>result</strong> – Result of the euclidean distance.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.geo.calc_dist_milepost">
+<span class="sig-prename descclassname"><span class="pre">systool.geo.</span></span><span class="sig-name descname"><span class="pre">calc_dist_milepost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gdf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTMx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTMy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dist'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.geo.calc_dist_milepost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the distance in meters of a point along the line (milepost).
+ATTENTION! GeoDataFrame must be projected in mercator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gdf</strong> (<em>GeoDataFrame</em>) – GeoDataFrame containing the geographical data
+that the milepost are going to be calculated.</p></li>
+<li><p><strong>mask</strong> (<em>Pandas Bool Series</em>) – Pandas Bool Series to mask the given
+GeoDataFrame.</p></li>
+<li><p><strong>x</strong> (<em>String</em>) – Longitude column name.</p></li>
+<li><p><strong>y</strong> (<em>LineString</em>) – Latitude column name.</p></li>
+<li><p><strong>new_col</strong> (<em>String</em>) – Column name for the calculated milepost.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>gdf</strong> – Inputted GeoDataFrame now with the mileposts
+distance column.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>GeoDataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.geo.calc_dist_orthogonal">
+<span class="sig-prename descclassname"><span class="pre">systool.geo.</span></span><span class="sig-name descname"><span class="pre">calc_dist_orthogonal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTMx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'UTMy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dist'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.geo.calc_dist_orthogonal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the minimum distance between a coord (x,y) and a line
+(i.e., the orthogonal projection).
+ATTENTION ! geo.DataFrame must be projected in mercator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>GeoDataFrame</em>) – GeoDataFrame containing the geometry
+lines and all coordinates.</p></li>
+<li><p><strong>mask</strong> (<em>Pandas Bool Series</em>) – Pandas Bool Series to mask the given
+GeoDataFrame.</p></li>
+<li><p><strong>x</strong> (<em>String</em>) – Longitude column name.</p></li>
+<li><p><strong>y</strong> (<em>LineString</em>) – Latitude column name.</p></li>
+<li><p><strong>new_col</strong> (<em>String</em>) – Column name for the calculated milepost.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>gdf</strong> – Inputted GeoDataFrame now with the mileposts
+distance column.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>GeoDataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.geo.convert2degree">
+<span class="sig-prename descclassname"><span class="pre">systool.geo.</span></span><span class="sig-name descname"><span class="pre">convert2degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.geo.convert2degree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a given shapefile to degrees, i.e. Lat and Long.
+Saves the file converted in the same path with <a href="#id1"><span class="problematic" id="id2">degree_</span></a> as prefix name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>String</em>) – Path containing the file to be open
+without the file name and extension.</p></li>
+<li><p><strong>file</strong> (<em>String</em>) – File name with extension.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.geo.convert2utm">
+<span class="sig-prename descclassname"><span class="pre">systool.geo.</span></span><span class="sig-name descname"><span class="pre">convert2utm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">utm_zone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">23</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_south</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.geo.convert2utm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a given shapefile to UTM.
+Saves the file converted in the same path with <a href="#id3"><span class="problematic" id="id4">utm_</span></a> as prefix name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>String</em>) – Path containing the file to be open
+without the file name and extension.</p></li>
+<li><p><strong>file</strong> (<em>String</em>) – File name with extension.</p></li>
+<li><p><strong>utm_zone</strong> (<em>Int</em>) – UTM Zone code.</p></li>
+<li><p><strong>set_south</strong> (<em>Bool</em>) – True if located in southern hemisphere,
+False if located in northern hemisphere.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.geo.convert_dataframe">
+<span class="sig-prename descclassname"><span class="pre">systool.geo.</span></span><span class="sig-name descname"><span class="pre">convert_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">convert_to</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">utm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['UTMx',</span> <span class="pre">'UTMy']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat_lon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['LAT',</span> <span class="pre">'LON']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">utm_zone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">23</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_south</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.geo.convert_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert columns of DataFrame from/to degrees/UTM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – DataFrame containing the columns
+that are going to be converted.</p></li>
+<li><p><strong>convert_to</strong> (<em>String</em>) – Text value with the convertion type.
+Must be ‘latLon’ or ‘UTM’</p></li>
+<li><p><strong>utm</strong> (<em>List</em>) – Names for the Longitude and Latitude columns
+in UTM that are going to be converted.</p></li>
+<li><p><strong>lat_lon</strong> (<em>List</em>) – Names for the Longitude and Latitude columns
+in Degrees that are going to be converted.</p></li>
+<li><p><strong>utm_zone</strong> (<em>Int</em>) – UTM Zone code.</p></li>
+<li><p><strong>set_south</strong> (<em>Bool</em>) – True if located in southern hemisphere,
+False if located in northern hemisphere.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>df</strong> – Inputted GeoDataFrame now with the mileposts
+distance column.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.geo.flat_geom">
+<span class="sig-prename descclassname"><span class="pre">systool.geo.</span></span><span class="sig-name descname"><span class="pre">flat_geom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geo</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.geo.flat_geom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flatten GeoDataFrame geometries.
+Ex: All MultiLineStrings become LineStrings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>geo</strong> (<em>GeoDataFrame</em>) – GeoDataFrame with the geometries
+that are going to be flatten.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>geo</strong> – GeoDataFrame with flatten geometries</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>GeoDataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-systool.linreg">
+<span id="systool-linreg-module"></span><h2>systool.linreg module<a class="headerlink" href="#module-systool.linreg" title="Permalink to this headline">¶</a></h2>
+<p>Created on Tue Apr 12 10:32:35 2022</p>
+<p>&#64;author: bcalazans</p>
+<p>Módulo da regressão linear
+&gt; útil para a determinação de GERAÇÂO DE VIAGENS no modelo 4 etapas</p>
+<p>Dado um conjunto de variáveis socioeconomicas e atração/produção das zonas,
+gera todas as regressões estatisticamente plausíveis e solta uma tabela para
+avalição crítica dos resultados</p>
+<p>É possível gerar relatório em HTML de regress~eos específicas, para visualizar
+os testes estatísticos realizados no processo</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.linreg.fit_model">
+<span class="sig-prename descclassname"><span class="pre">systool.linreg.</span></span><span class="sig-name descname"><span class="pre">fit_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intercept</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cov_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nonrobust'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.linreg.fit_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executa regressão e testa retirada de outliers
+Retorna dois modelos, um completo e outro sem outliers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>pd.Series ou pd.DataFrame</em>) – Variáveis independentes do modelo de regressão.</p></li>
+<li><p><strong>y</strong> (<em>pd.Series</em>) – Variável dependente do modelo de regressão. Geralmente, ATRAÇÃO ou PRODUÇÃO de viagens.</p></li>
+<li><p><strong>intercept</strong> (<em>bool</em><em>, </em><em>optional</em>) – True para forçar que regressão cruze o eixo 0. The default is False.</p></li>
+<li><p><strong>cov_type</strong> (<em>str</em><em>, </em><em>optional</em>) – See regression.linear_model.RegressionResults for a description of the available covariance estimators…
+The default is ‘nonrobust’.</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Gera um arquivo HTML com vários testes estatísticos. The default is False.</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Salva o arquivo HTML no caminho indicado. The default is None (does not save file)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>model</strong> (<em>container or StatsModelResults</em>) – Modelo com todos os registors.</p></li>
+<li><p><strong>model_out</strong> (<em>container or StatsModelResults</em>) – Modelo otimizado sem outliers.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.linreg.loop_models">
+<span class="sig-prename descclassname"><span class="pre">systool.linreg.</span></span><span class="sig-name descname"><span class="pre">loop_models</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xcols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ycol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cut_r</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_intercept</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.linreg.loop_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Realiza a regressão de todas as combinações não correlacionadas
+Faz testes para ver se a regressão é válida ou não e salva informações em
+um dataframe para investigação</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>TYPE</em>) – DESCRIPTION.</p></li>
+<li><p><strong>mask</strong> (<em>boolean series</em><em>, </em><em>OPTIONAL</em>) – Pass a mask to dataframe and rows can be ignored</p></li>
+<li><p><strong>xcols</strong> (<em>list</em>) – List of column names for independent stuff.</p></li>
+<li><p><strong>ycol</strong> (<em>string</em>) – NAme of column for the dependent variable.</p></li>
+<li><p><strong>keep_all</strong> (<em>TYPE</em><em>, </em><em>optional</em>) – Manter todas as regressões, ainda que não tenham passado nos testes.
+The default is False.</p></li>
+<li><p><strong>cut_r</strong> (<em>TYPE</em><em>, </em><em>optional</em>) – Rsquared de linha de corte. Valores maiores indicam que regressão pode
+melhorar tirando outliers. Realiza então a regressão do outlier.
+The default is 0.5.</p></li>
+<li><p><strong>force_intercept</strong> (<em>bool</em>) – if TRUE best model is alwys the model that intercepts</p></li>
+<li><p><strong>kargs</strong> (<em>DICT</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>Parâmetros para fit_model:</dt><dd><p>&gt; intercept (True or Flse)
+&gt; plot (True or False)
+&gt; covType (nonrobust, HC3, etc)</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>df_regs</strong> – Contains all regressions found with some indicator to help us choose for the best one.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas dataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-systool.plot">
+<span id="systool-plot-module"></span><h2>systool.plot module<a class="headerlink" href="#module-systool.plot" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.plot.hist">
+<span class="sig-prename descclassname"><span class="pre">systool.plot.</span></span><span class="sig-name descname"><span class="pre">hist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">what</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lwl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legenda</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subtitle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">report_nan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comentario</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend_control</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%V'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.plot.hist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a cute histogram based on the source data the user provide.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>what: DataFrame or Series</dt><dd><p>The data that the user want to be the histogram base.</p>
+</dd>
+<dt>bins: integer</dt><dd><p>Integer number that represent the number of requisited
+bins that the user want to be in the histogram.</p>
+</dd>
+<dt>lwl: float</dt><dd><p>Float number to represent the lower limit.</p>
+</dd>
+<dt>upl: float</dt><dd><p>Float number to represent the upper limit.</p>
+</dd>
+<dt>legenda: str</dt><dd><p>String value that represents the title of the plot
+legend.</p>
+</dd>
+<dt>xlabel: str</dt><dd><p>String value responsible for the xlabel title.</p>
+</dd>
+<dt>subtitle: str</dt><dd><p>String value responsible for the graph subtitle.</p>
+</dd>
+<dt>title: str</dt><dd><p>String value responsible for the graph title.</p>
+</dd>
+<dt>report_nan: bool</dt><dd><p>Boolean value responsible to represent if the user
+want or not the column reporting the number of NaN
+values.</p>
+</dd>
+<dt>comentario: str</dt><dd><p>String value responsible to plot a comment it the bottom
+of the graph.</p>
+</dd>
+<dt>source: str</dt><dd><p>String value that indicates the source of the data.</p>
+</dd>
+<dt>legend_control: str</dt><dd><p>String value that indicates the type of graph axis and
+labels displayed.
+V - For just values.
+% - For just percentages.
+V% - For values as labels and percentages as axis.
+%V - For percentages as labels and values as axis.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>fig<span class="classifier">Matplotlib figure type.</span></dt><dd><p>Figure containing the results os the histogram plot.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.plot.mapa">
+<span class="sig-prename descclassname"><span class="pre">systool.plot.</span></span><span class="sig-name descname"><span class="pre">mapa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shapes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subtitle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_lin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir2dashed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_pts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DIR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_zns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.plot.mapa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used to plot maps based on multiple inputed GeoDataFrames.</p>
+<blockquote>
+<div><dl>
+<dt>shapes: list</dt><dd><p>List of the GeoDataFrames that the user wants to plot.</p>
+</dd>
+<dt>path: str</dt><dd><p>String value with the file output path for the maps
+ploted using this function.</p>
+</dd>
+<dt>title: str</dt><dd><p>Title of the map.</p>
+</dd>
+<dt>subtitle: str</dt><dd><p>Subtitle of the map.</p>
+</dd>
+<dt>col_lin: str</dt><dd><p>String value responsible for doing two different things:
+1 - Determinate what color you want the linestrings to be.
+or
+2 - Determinate what GeoDataFrame column you want to be used</p>
+</dd>
+<dt>dir2dashed: bool</dt><dd><p>Boolean value to indicate if the analized linestrings have
+multiple directions.</p>
+</dd>
+<dt>col_pts: str</dt><dd><p>String value responsible for doing two different things:
+1 - Determinate what color you want the points to be.
+or
+2 - Determinate what GeoDataFrame column you want to be used</p>
+<blockquote>
+<div><p>as categoric values for the points.</p>
+</div></blockquote>
+</dd>
+<dt>col_size: int or str</dt><dd><p>Determinate the size of the point ploted values.</p>
+</dd>
+<dt>coords: list</dt><dd><p>List of GeoDataFrame columns responsible to share the coordinates
+of the point data that are going to be ploted if there wasn’t any
+geometry column.</p>
+</dd>
+<dt>dir_col: str</dt><dd><p>String value with the name of the column that have the direction
+data.</p>
+</dd>
+<dt>col_zns: str</dt><dd><p>String value responsible for doing two different things:
+1 - Determinate what color you want the polygons to be.
+or
+2 - Determinate what GeoDataFrame column you want to be used</p>
+<blockquote>
+<div><p>as categoric values for the polygons.</p>
+</div></blockquote>
+</dd>
+<dt>heat: str</dt><dd><p>String value with the seaborn color pallete used for
+cloropletic maps. It will create a cloropletic zone
+classification</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>fig<span class="classifier">Matplotlib figure type.</span></dt><dd><p>Figure containing the ploted map.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systool.plot.plot_sidemap">
+<span class="sig-prename descclassname"><span class="pre">systool.plot.</span></span><span class="sig-name descname"><span class="pre">plot_sidemap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_left</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_right</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systool.plot.plot_sidemap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that is responsible for plot two early created maps side by side.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>map_left: Matplotlib figure type</dt><dd><p>Figure of the map you want to be plotted on the left
+side of the new figure.</p>
+</dd>
+<dt>map_right: Matplotlib figure type</dt><dd><p>Figure of the map you want to be plotted on the right
+side of the new figure.</p>
+</dd>
+<dt>file_name: str</dt><dd><p>String value with the path and file name of the exported
+new figure.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>fig<span class="classifier">Matplotlib figure type.</span></dt><dd><p>Figure containing the two ploted maps, side by side.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</section>
+<section id="module-systool">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-systool" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">systool package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-systool.data">systool.data module</a></li>
+<li><a class="reference internal" href="#module-systool.distribution">systool.distribution module</a></li>
+<li><a class="reference internal" href="#module-systool.geo">systool.geo module</a></li>
+<li><a class="reference internal" href="#module-systool.linreg">systool.linreg module</a></li>
+<li><a class="reference internal" href="#module-systool.plot">systool.plot module</a></li>
+<li><a class="reference internal" href="#module-systool">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="modules.html"
+                          title="previous chapter">main</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/systool.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="main"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Systool  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >main</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">systool package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2022, bcalazans &amp; pcardoso.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    </div>
+  </body>
+</html>

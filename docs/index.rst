@@ -1,10 +1,10 @@
-.. sysgadgets documentation master file, created by
-   sphinx-quickstart on Fri May  6 12:07:34 2022.
+.. systool documentation master file, created by
+   sphinx-quickstart on Fri Oct 28 14:02:59 2022.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to sysgadgets's documentation!
-======================================
+Welcome to systool's documentation!
+===================================
 
 .. toctree::
    :maxdepth: 2

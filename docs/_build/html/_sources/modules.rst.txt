@@ -1,8 +1,7 @@
-sysgadgets
-==========
+main
+====
 
 .. toctree::
    :maxdepth: 4
 
-   setup
-   sysgadgets
+   systool

@@ -1,0 +1,93 @@
+systool.utils package
+=====================
+
+Submodules
+----------
+
+systool.utils.charts module
+---------------------------
+
+.. automodule:: systool.utils.charts
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+systool.utils.flatt\_geom module
+--------------------------------
+
+.. automodule:: systool.utils.flatt_geom
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+systool.utils.get\_ftp\_data module
+-----------------------------------
+
+.. automodule:: systool.utils.get_ftp_data
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+systool.utils.get\_socioEconomic\_data module
+---------------------------------------------
+
+.. automodule:: systool.utils.get_socioEconomic_data
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+systool.utils.linear\_regression\_make module
+---------------------------------------------
+
+.. automodule:: systool.utils.linear_regression_make
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+systool.utils.linear\_regression\_plot module
+---------------------------------------------
+
+.. automodule:: systool.utils.linear_regression_plot
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+systool.utils.maps module
+-------------------------
+
+.. automodule:: systool.utils.maps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+systool.utils.miscFunctions module
+----------------------------------
+
+.. automodule:: systool.utils.miscFunctions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+systool.utils.readWrite module
+------------------------------
+
+.. automodule:: systool.utils.readWrite
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+systool.utils.report module
+---------------------------
+
+.. automodule:: systool.utils.report
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: systool.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="747fa9c3-260e-4706-904e-64ee0181f479" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/systools.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/systools.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/codestyle.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/defaults/defaults-codestyle-0.2.0.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/defaults/defaults-encoding-0.2.0.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/defaults/defaults-vcs-0.2.0.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/defaults/defaults-workspace-0.2.0.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/encoding.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/vcs.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.spyproject/config/workspace.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.rst" beforeDir="false" afterPath="$PROJECT_DIR$/README.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/doctrees/environment.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/doctrees/environment.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/doctrees/index.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/doctrees/index.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/doctrees/modules.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/doctrees/modules.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/doctrees/setup.doctree" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/doctrees/sysgadgets.doctree" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/doctrees/sysgadgets.helpers.doctree" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/doctrees/systools.doctree" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/.buildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/.buildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_sources/index.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/_sources/index.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_sources/modules.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/_sources/modules.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_sources/setup.rst.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_sources/sysgadgets.helpers.rst.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_sources/sysgadgets.rst.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_sources/systools.rst.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_static/base-stemmer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_static/basic.css" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/_static/basic.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_static/classic.css" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/_static/classic.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_static/doctools.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/_static/doctools.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_static/documentation_options.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/_static/documentation_options.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_static/jquery-3.5.1.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/_static/jquery-3.5.1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_static/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/_static/jquery.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_static/language_data.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/_static/language_data.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_static/portuguese-stemmer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_static/pygments.css" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/_static/pygments.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_static/searchtools.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/_static/searchtools.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_static/sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/_static/sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_static/translations.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_static/underscore-1.13.1.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/_static/underscore-1.13.1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/_static/underscore.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/_static/underscore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/genindex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/modules.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/modules.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/objects.inv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/py-modindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/py-modindex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/_build/html/searchindex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/setup.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/sysgadgets.helpers.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/sysgadgets.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/_build/html/systools.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/docs/conf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/make.bat" beforeDir="false" afterPath="$PROJECT_DIR$/docs/make.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/modules.rst" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/setup.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/sysgadgets.helpers.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/sysgadgets.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/systools.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/.ipynb_checkpoints/data_examples-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/.ipynb_checkpoints/data_examples-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/.ipynb_checkpoints/ex01_data-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/.ipynb_checkpoints/ex01_data-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/.ipynb_checkpoints/ex02_plot-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/.ipynb_checkpoints/ex02_plot-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/.ipynb_checkpoints/ex03_linreg-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/.ipynb_checkpoints/ex03_linreg-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/.ipynb_checkpoints/ex04_distribution-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/.ipynb_checkpoints/ex04_distribution-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/.ipynb_checkpoints/example_linreg-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/.ipynb_checkpoints/example_linreg-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/ex01_data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/ex01_data.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/ex02_plot.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/ex02_plot.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/ex03_linreg.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/ex03_linreg.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/ex04_distribution.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/ex04_distribution.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/examples_databases/get_col/si-bol-2020.csv" beforeDir="false" afterPath="$PROJECT_DIR$/examples/examples_databases/get_col/si-bol-2020.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/examples_databases/hist/si-log-2020.csv" beforeDir="false" afterPath="$PROJECT_DIR$/examples/examples_databases/hist/si-log-2020.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/examples_databases/input_distribuicao.txt" beforeDir="false" afterPath="$PROJECT_DIR$/examples/examples_databases/input_distribuicao.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/examples_databases/maps/ESTACAO_METRO.csv" beforeDir="false" afterPath="$PROJECT_DIR$/examples/examples_databases/maps/ESTACAO_METRO.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/examples_databases/open_file/si-log-2020.csv" beforeDir="false" afterPath="$PROJECT_DIR$/examples/examples_databases/open_file/si-log-2020.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/examples_databases/open_file/si-log-2020.txt" beforeDir="false" afterPath="$PROJECT_DIR$/examples/examples_databases/open_file/si-log-2020.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/examples_databases/save_file/csv_file.csv" beforeDir="false" afterPath="$PROJECT_DIR$/examples/examples_databases/save_file/csv_file.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/examples_databases/save_file/shp_file.col" beforeDir="false" afterPath="$PROJECT_DIR$/examples/examples_databases/save_file/shp_file.col" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/regModel_ATRA=EMPREGOS_intercepNO_ZN119.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/regModel_ATRA=EMPREGOS_intercepNO_ZN119.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/regModel_PROD=POP+DOMICILIOS+PEA_intercepYES_ZN119.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/regModel_PROD=POP+DOMICILIOS+PEA_intercepYES_ZN119.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/systool/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/systool/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/systool/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/systool/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/systool/distribution.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/systool/distribution.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/systool/linreg.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/systool/linreg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/systool/plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/systool/plot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/systool/utils/charts.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/systool/utils/charts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/systool/utils/linear_regression_make.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/systool/utils/linear_regression_make.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/systool/utils/linear_regression_plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/systool/utils/linear_regression_plot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/systool/utils/maps.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/systool/utils/maps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/systool/utils/readWrite.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/systool/utils/readWrite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/systool/utils/report.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/systool/utils/report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/setup.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/distribution.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/geo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/helpers/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/helpers/charts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/helpers/flatt_geom.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/helpers/get_ftp_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/helpers/get_socioEconomic_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/helpers/linear_regression_make.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/helpers/linear_regression_plot.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/helpers/maps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/helpers/miscFunctions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/helpers/readWrite.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/helpers/report.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/linreg.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systool/plot.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/systra.yml" beforeDir="false" afterPath="$PROJECT_DIR$/systra.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/data_tp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/data_tp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/linreg_tp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/linreg_tp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/plot_tp.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/plot_tp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_databases/ESTACAO_METRO.csv" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_databases/ESTACAO_METRO.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_databases/test.col" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_databases/test.col" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_databases/test.csv" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_databases/test.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_databases/test.dbf" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_databases/test.dbf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_databases/test.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_databases/test.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_databases/test_dataframe2numeric.csv" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_databases/test_dataframe2numeric.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_databases/test_flattenhierarchical_col_badge.csv" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_databases/test_flattenhierarchical_col_badge.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_databases/test_openfile.csv" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_databases/test_openfile.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_databases/test_openfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_databases/test_openfile.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_databases/test_plot.csv" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_databases/test_plot.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_general.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_general.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_outputs/regModel_y=x_intercepNO_ZN11.html" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_outputs/regModel_y=x_intercepNO_ZN11.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2GlTmKBL09kGJHd3T6nQpt9LVaz" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\pcardoso\Documents\GitHub\systools\main\systool\utils" />
+      <recent name="C:\Users\pcardoso\Documents\GitHub\systools\main\systool" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Python tests in test_general.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="systools" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_general.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Python tests in test_general.py" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="747fa9c3-260e-4706-904e-64ee0181f479" name="Changes" comment="" />
+      <created>1666962328093</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1666962328093</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
