@@ -13,6 +13,8 @@ Módulos já utilizáveis:
     - Módulo de cálculo e plot de regressões lineares relacionadas à Engenharia de Transportes.
 - systool.distribution
     - Módulo de cálculo de distribuições matriciais relacionadas ao Modelo 4 Etapas de Engenharia de Transportes.
+- systool.geo
+    - Módulo de processamento de dados geográficos relacionados à Engenharia de Transportes.
 
 Instalação:
 
