@@ -1,3 +1,23 @@
+def get_line_zoning_and_muni_tp():
+
+    import os
+    import geopandas as gpd
+    import main.systool.geo as geo
+
+    file_path = os.path.dirname(os.path.abspath(__file__))
+    linhas = gpd.read_file(os.path.join(file_path, r'test_databases\test_rotas.shp'))
+    zoneamento = gpd.read_file(os.path.join(file_path, r'test_databases\test_zoneamento.shp'))
+
+    linhas.to_crs('epsg: 32723')
+    zoneamento.to_crs('epsg: 32723')
+
+    old_shape_values = linhas.shape[0]
+
+    gdf = geo.get_line_zoning_and_muni(linhas, zoneamento, 'ID', 'MUN_RMBH')
+
+    assert gdf.shape[0] >= old_shape_values and 'ID' in gdf.columns and 'MUN_RMBH' in gdf.columns
+
+
 def convert2utm_tp():
 
     import os
@@ -119,3 +139,5 @@ def flat_geom_tp():
     gdf = geo.flat_geom(gdf)
 
     assert gdf['geometry'].geom_type[0] == 'LineString'
+
+get_line_zoning_and_muni_tp()

@@ -19,6 +19,36 @@ from shapely.geometry import LineString, Point
 from .utils import flatt_geom as fg
 
 
+def get_line_zoning_and_muni(line_shp, zone_shp, column_id_zone='ID_ZONE', column_nm_muni='NM_MUNI'):
+
+    """
+    Tag all the Zones ID and Municipalities to each line that are intersected by it.
+
+    Parameters
+    ----------
+    line_shp: GeoDataFrame
+              GeoDataFrame containing the LineStrings.
+    zone_shp: GeoDataFrame
+              GeoDataFrame containing the Zones and all municipalities.
+    column_id_zone: String
+                    Name of the column containing the zone ID.
+    column_nm_muni: String
+                    Name of the column containing the zone municipalities.
+
+    Returns
+    -------
+
+    gdf: GeoDataFrame
+         GeoDataFrame with all zone intersection occurrence in each line,
+         with municipalities as well.
+
+    """
+
+    gdf = gpd.sjoin(line_shp, zone_shp[[column_id_zone, column_nm_muni, 'geometry']], how='left')
+
+    return gdf
+
+
 def calc_dist_euclidean(df, x1, x2, y1, y2):
 
     """

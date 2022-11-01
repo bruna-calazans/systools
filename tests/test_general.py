@@ -78,3 +78,7 @@ def test_geo_calc_dist_orthogonal():
 
 def test_geo_flat_geom():
     return geo_tp.flat_geom_tp()
+
+
+def test_get_line_zoning_and_muni():
+    return geo_tp.get_line_zoning_and_muni_tp()
