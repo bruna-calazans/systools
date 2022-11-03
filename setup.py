@@ -4,7 +4,7 @@ from setuptools import setup
 setup(
   
     name='systool',
-    version='0.04.00',
+    version='0.05.00',
     license='MIT',
     author="Bruna Calazans (bruna-calazans) & Pedro Chiachio (pcardoso-sk)",
     author_email='bcalazans@systra.com',

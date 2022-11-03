@@ -4,7 +4,8 @@ Passos-Pip:
 
 2 - Entrar na pasta do projeto na instância mais externa.
 
-3 - Editar o setup.py com as informações do projeto.
+3 - Editar o setup.py com as informações do projeto e o README com a versão
+3.1) entrar em systools\main\systool\__init__.py e apagar os ".." de todos os imports
 
 4 - Rodar no terminal dentro da pasta do projeto "python setup.py sdist bdist_wheel".
 
@@ -15,3 +16,15 @@ Passos-Pip:
 7 - Digitar usuário e senha do pypi.
 
 8 - Testar.
+> pip install systool
+> python
+> import systool
+>> be happy
+9 - entrar no systools\main\systool\__init__.py e adicionar o ".." para que funcione nos testes locais
+Ex:
+from systool import geo
+para
+from ..systool import geo
+
+
+> se der errado/esquecer de algo, recomece do passo (4)

@@ -1,0 +1,13 @@
+pytest
+pandas
+numpy
+matplotlib
+matplotlib_scalebar
+geopandas
+openpyxl
+seaborn
+statsmodels
+tqdm
+scipy
+plotly
+shapely
