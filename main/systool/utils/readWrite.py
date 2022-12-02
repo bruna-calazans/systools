@@ -122,6 +122,8 @@ def save_df_as_csv(df, path, name='test', american=False, kwargs=None):
 
     keywords = get_american_standers(american)
     kwargs = {**keywords, **kwargs}
+    if 'index' not in kwargs.keys():
+        kwargs['index'] = False # default do not save index
 
     # Reasures passed name is without extension
     file_name = file_name_with_extension(path, name)
@@ -183,13 +185,13 @@ def save_df_as_shp(df, path, name, ext='GPKG'):
 
 
 def save_df_as_excel(df, path, name, sheet_name='Sheet1', startrow=None,
-                     truncate_sheet=False, **to_excel_kwargs):
+                     truncate_sheet=False, **kwargs):
 
     filename = file_name_with_extension(path, name, ext='.xlsx')
            
     # Ignore [engine] parameter if it was passed.
-    if 'engine' in to_excel_kwargs:
-        to_excel_kwargs.pop('engine')
+    if 'engine' in kwargs:
+        kwargs.pop('engine')
 
     try:
         # Try to open an existing workbook.
@@ -223,7 +225,7 @@ def save_df_as_excel(df, path, name, sheet_name='Sheet1', startrow=None,
 
     # Write out the new sheet.
     df.to_excel(writer, sheet_name, startrow=startrow, 
-                index=False, **to_excel_kwargs)
+                index=False, **kwargs)
 
     # Save the workbook.
     writer.save()

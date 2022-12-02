@@ -11,7 +11,7 @@ Módulo com funções úteis no tratamento de dados tabulados.
 import pandas as pd
 
 # Systools Modules
-from .utils import readWrite as rW
+from utils import readWrite as rW
 
 
 def dataframe2numeric(df, col_dt_preffix='', col_td_preffix=''):
@@ -138,11 +138,13 @@ def open_file(path, name=None, expected_cols=None, usa=False, col_td_prefix='gap
 # Insert excel parameters if needed, after the "truncate_sheet" parameter.
 
 def save_file(df, path, name='test', usa=False, ext='csv',
-              sheet_name='Sheet1', start_row=None, truncate_sheet=False):
+              sheet_name='Sheet1', start_row=None, truncate_sheet=False,
+              kwargs={}):
     """
     Save DataFrame to an exterior file created and formated based
     on various parameters.
-    Support csv, txt, parquet, excel and shape.
+    Support csv, txt, parquet, excel and geografical(gpkg, shp, geojson).
+    By default does not save index on csv/txt mode. Pass kwargs={'index':True}
 
     Parameters
     ----------
@@ -177,20 +179,22 @@ def save_file(df, path, name='test', usa=False, ext='csv',
 
     truncate_sheet : Boolean, optional
         Remove and recreate the destination sheet of the exported excel file.
+        
+    kwargs: dictionary with any valid parameter for pandas.to_csv or pandas.to_excel
 
     """
             
     extensions = ['shp', 'csv', 'parquet', 'xlsx']
 
     if 'geometry' in df.columns or ext in ['shp','gpkg','geojson']:
-        if ext='csv': ext = 'gpkg' #if ext is default csv and has the column of geometry, uses geopackge as default
+        if ext=='csv': ext = 'gpkg' #if ext is default csv and has the column of geometry, uses geopackge as default
         rW.save_df_as_shp(df, path, name, ext)
     elif ext == 'csv':
-        rW.save_df_as_csv(df, path, name, usa)
+        rW.save_df_as_csv(df, path, name, usa, kwargs=kwargs)
     elif ext == 'parquet':
         rW.save_df_as_parquet(df, path, name)
     elif ext == 'xlsx':
-        rW.save_df_as_excel(df, path, name, sheet_name, start_row, truncate_sheet)
+        rW.save_df_as_excel(df, path, name, sheet_name, start_row, truncate_sheet, kwargs=kwargs)
     else: 
         raise Exception(f'ext parameter must be one of the following {extensions}')
     return None
