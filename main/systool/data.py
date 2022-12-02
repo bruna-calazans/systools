@@ -94,7 +94,7 @@ def open_file(path, name=None, expected_cols=None, usa=False, col_td_prefix='gap
 
     """
     Open file as a DataFrame.
-    Support csv, txt, parquet, excel and shape.
+    Support csv, txt, parquet, excel and shape/geopackge.
 
     Parameters
     ----------
@@ -166,7 +166,8 @@ def save_file(df, path, name='test', usa=False, ext='csv',
 
     ext : String, optional
         The file extension.
-        Must be csv, txt, parquet, excel or shape.
+        Must be csv, txt, parquet, excel, shp, gpkg, geojson.
+        DEFAULT is csv for text files and gpkg for geographic files
 
     sheet_name : String, optional
         The file, when saved as an excel file, sheet name.
@@ -181,8 +182,9 @@ def save_file(df, path, name='test', usa=False, ext='csv',
             
     extensions = ['shp', 'csv', 'parquet', 'xlsx']
 
-    if 'geometry' in df.columns or ext == 'shp':
-        rW.save_df_as_shp(df, path, name)
+    if 'geometry' in df.columns or ext in ['shp','gpkg','geojson']:
+        if ext='csv': ext = 'gpkg' #if ext is default csv and has the column of geometry, uses geopackge as default
+        rW.save_df_as_shp(df, path, name, ext)
     elif ext == 'csv':
         rW.save_df_as_csv(df, path, name, usa)
     elif ext == 'parquet':

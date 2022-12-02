@@ -64,7 +64,7 @@ def load_text_file(path, name, cols=None, usa=False, kwargs=None):
     return df
 
 
-def load_shp_file(path, name, cols=None):
+def load_geographic_file(path, name, cols=None):
 
     df = gpd.read_file(os.path.normpath(os.path.join(path, name)))
     try:
@@ -95,15 +95,15 @@ def load_file(path, name, expected_cols, usa, **kwargs):
         path = os.path.dirname(path)
     
     # Checks if name contains the suported extensions.
-    extensions = ['txt', 'csv', 'shp', 'dbf', 'xlsx', 'parquet']
+    extensions = ['txt', 'csv', 'shp', 'dbf', '.gpkg','xlsx', 'parquet']
     try:
         ext = name.split(".")[1].lower()
         assert ext in extensions, f'{ext:} is not supported. Options are {extensions}'
     except IndexError:
         raise Exception('Param "name" was provided without extension')
 
-    if ext in ['shp', 'dbf']:
-        df = load_shp_file(path, name, expected_cols)      
+    if ext in ['shp', 'dbf', '.gpkg']:
+        df = load_geographic_file(path, name, expected_cols)      
         if df.geometry.isnull().all():
             del df['geometry']
     elif ext in ['parquet']:
@@ -141,21 +141,44 @@ def save_df_as_parquet(df, path, name):
     return True
 
 
-def save_df_as_shp(df, path, name):
+def save_df_as_shp(df, path, name, ext='GPKG'):
     # There is a limitation with SHPs that only saves columns with 10charcMax.
     # So we are doing a gambiarra...
+    # we alwys save with a dictionary with invented extension .col
+    # when we read geographic files, we re-read this .col dict and rename cols
     
+       
     col_names = list(df.columns)
     col_names.remove('geometry')
     
-    aux_dict = dict(zip(col_names, ['c'+str(x) for x in list(range(0, len(col_names)))]))
-    temp = pd.Series(aux_dict).to_frame()
-    temp.to_csv(os.path.normpath(os.path.join(path, name + '.col')), 
-                header=False, index=True)
     
-    df = df.rename(columns=aux_dict)    
-    df.to_file(os.path.normpath(os.path.join(path, name + '.shp')), 
-               driver='ESRI Shapefile')
+    aux_dict = {}
+    for i in list(range(0, len(col_names))):
+        if len(col_names[i]) > 10: # shapefile will trim the column name
+            aux_dict[col_names[i]] = 'c' + str(i) # use an alias
+    
+    if aux_dict != {}:
+        # estrutra o arquivo e salva        
+        temp = pd.Series(aux_dict).to_frame()
+        temp.to_csv(os.path.normpath(os.path.join(path, name + '.col')), 
+                    header=False, index=True)
+        
+        # renomeia o df para as novas colunas
+        df = df.rename(columns=aux_dict) 
+    
+    # salva o geoDataFrame
+    ext = ext.upper()
+    if ext == 'GPKG':
+        df.to_file(os.path.normpath(os.path.join(path, name + '.gpkg')), 
+                   driver="GPKG")
+    elif ext == 'SHP':
+        df.to_file(os.path.normpath(os.path.join(path, name + '.shp')), 
+                   driver='ESRI Shapefile')
+    elif ext == 'GEOJSON':
+        df.to_file(os.path.normpath(os.path.join(path, name + '.geojson')), 
+                   driver='GeoJSON')        
+    else:
+        raise Exception(f'Extension ({ext}) not supported')
     return True
 
 
