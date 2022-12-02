@@ -95,14 +95,14 @@ def load_file(path, name, expected_cols, usa, **kwargs):
         path = os.path.dirname(path)
     
     # Checks if name contains the suported extensions.
-    extensions = ['txt', 'csv', 'shp', 'dbf', '.gpkg','xlsx', 'parquet']
+    extensions = ['txt', 'csv', 'shp', 'dbf', 'gpkg','xlsx', 'parquet']
     try:
         ext = name.split(".")[1].lower()
         assert ext in extensions, f'{ext:} is not supported. Options are {extensions}'
     except IndexError:
         raise Exception('Param "name" was provided without extension')
 
-    if ext in ['shp', 'dbf', '.gpkg']:
+    if ext in ['shp', 'dbf', 'gpkg']:
         df = load_geographic_file(path, name, expected_cols)      
         if df.geometry.isnull().all():
             del df['geometry']
