@@ -149,10 +149,8 @@ def save_df_as_shp(df, path, name, ext='GPKG'):
     # we alwys save with a dictionary with invented extension .col
     # when we read geographic files, we re-read this .col dict and rename cols
     
-       
     col_names = list(df.columns)
     col_names.remove('geometry')
-    
     
     aux_dict = {}
     for i in list(range(0, len(col_names))):
@@ -167,6 +165,9 @@ def save_df_as_shp(df, path, name, ext='GPKG'):
         
         # renomeia o df para as novas colunas
         df = df.rename(columns=aux_dict) 
+    
+    #TODO - se .col com o mesmo nome existente no local de salvar, apague-o
+    # procurar pelo arquivo: os.path.join(path, name + '.col')
     
     # salva o geoDataFrame
     ext = ext.upper()
