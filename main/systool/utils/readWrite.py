@@ -155,19 +155,22 @@ def save_df_as_shp(df, path, name, ext='GPKG'):
     aux_dict = {}
     for i in list(range(0, len(col_names))):
         if len(col_names[i]) > 10: # shapefile will trim the column name
-            aux_dict[col_names[i]] = 'c' + str(i) # use an alias
-    
+            aux_dict[col_names[i]] = 'c' + str(i) # use an alias   
+             
+    # delete existing file .col
+    if os.path.exists(os.path.join(path, name + '.col')):
+        os.remove(os.path.join(path, name + '.col'))
+        #print("Arquivo antigo excluído com sucesso")
+      
     if aux_dict != {}:
-        # estrutra o arquivo e salva        
+        # structure the file
         temp = pd.Series(aux_dict).to_frame()
         temp.to_csv(os.path.normpath(os.path.join(path, name + '.col')), 
                     header=False, index=True)
+        #print("Novo arquivo .col criado com sucesso")
         
         # renomeia o df para as novas colunas
         df = df.rename(columns=aux_dict) 
-    
-    #TODO - se .col com o mesmo nome existente no local de salvar, apague-o
-    # procurar pelo arquivo: os.path.join(path, name + '.col')
     
     # salva o geoDataFrame
     ext = ext.upper()
