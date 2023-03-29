@@ -1,3 +1,4 @@
+# -*- coding: cp1252 -*-
 import os
 import pandas as pd
 import geopandas as gpd
@@ -144,9 +145,9 @@ def save_df_as_parquet(df, path, name):
 
 
 def save_df_as_shp(df, path, name, ext='GPKG'):
-    # There is a limitation with SHPs that only saves columns with 10charcMax.
+    # There is a limitation with SHPs that only saves columns with maximun of 10 characters
     # So we are doing a gambiarra...
-    # we alwys save with a dictionary with invented extension .col
+    # we always save with a dictionary with invented extension .col
     # when we read geographic files, we re-read this .col dict and rename cols
     
     col_names = list(df.columns)
@@ -156,18 +157,21 @@ def save_df_as_shp(df, path, name, ext='GPKG'):
     for i in list(range(0, len(col_names))):
         if len(col_names[i]) > 10: # shapefile will trim the column name
             aux_dict[col_names[i]] = 'c' + str(i) # use an alias
-    
+
+    # nome do arquivo para salvar a correspondencia de colunas
+    name_col_file = os.path.normpath(os.path.join(path, name + '.col'))
+    # se antes exisita tal arquivo e nao vai precisar mais, apaga o anterior para nao gerar lixo
+    if aux_dict == {}:                
+        if os.path.exists(name_col_file): os.remove(name_col_file)
+        
     if aux_dict != {}:
         # estrutra o arquivo e salva        
         temp = pd.Series(aux_dict).to_frame()
-        temp.to_csv(os.path.normpath(os.path.join(path, name + '.col')), 
-                    header=False, index=True)
+        temp.to_csv(name_col_file, header=False, index=True) # vai salvar por cima se existente
         
         # renomeia o df para as novas colunas
         df = df.rename(columns=aux_dict) 
     
-    #TODO - se .col com o mesmo nome existente no local de salvar, apague-o
-    # procurar pelo arquivo: os.path.join(path, name + '.col')
     
     # salva o geoDataFrame
     ext = ext.upper()
