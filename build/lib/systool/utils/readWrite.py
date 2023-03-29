@@ -1,3 +1,4 @@
+# -*- coding: cp1252 -*-
 import os
 import pandas as pd
 import geopandas as gpd
@@ -64,7 +65,7 @@ def load_text_file(path, name, cols=None, usa=False, kwargs=None):
     return df
 
 
-def load_shp_file(path, name, cols=None):
+def load_geographic_file(path, name, cols=None):
 
     df = gpd.read_file(os.path.normpath(os.path.join(path, name)))
     try:
@@ -95,15 +96,15 @@ def load_file(path, name, expected_cols, usa, **kwargs):
         path = os.path.dirname(path)
     
     # Checks if name contains the suported extensions.
-    extensions = ['txt', 'csv', 'shp', 'dbf', 'xlsx', 'parquet']
+    extensions = ['txt', 'csv', 'shp', 'dbf', 'gpkg','xlsx', 'parquet']
     try:
         ext = name.split(".")[1].lower()
         assert ext in extensions, f'{ext:} is not supported. Options are {extensions}'
     except IndexError:
         raise Exception('Param "name" was provided without extension')
 
-    if ext in ['shp', 'dbf']:
-        df = load_shp_file(path, name, expected_cols)      
+    if ext in ['shp', 'dbf', 'gpkg']:
+        df = load_geographic_file(path, name, expected_cols)      
         if df.geometry.isnull().all():
             del df['geometry']
     elif ext in ['parquet']:
@@ -122,6 +123,8 @@ def save_df_as_csv(df, path, name='test', american=False, kwargs=None):
 
     keywords = get_american_standers(american)
     kwargs = {**keywords, **kwargs}
+    if 'index' not in kwargs.keys():
+        kwargs['index'] = False # default do not save index
 
     # Reasures passed name is without extension
     file_name = file_name_with_extension(path, name)
@@ -141,32 +144,59 @@ def save_df_as_parquet(df, path, name):
     return True
 
 
-def save_df_as_shp(df, path, name):
-    # There is a limitation with SHPs that only saves columns with 10charcMax.
+def save_df_as_shp(df, path, name, ext='GPKG'):
+    # There is a limitation with SHPs that only saves columns with maximun of 10 characters
     # So we are doing a gambiarra...
+    # we always save with a dictionary with invented extension .col
+    # when we read geographic files, we re-read this .col dict and rename cols
     
     col_names = list(df.columns)
     col_names.remove('geometry')
     
-    aux_dict = dict(zip(col_names, ['c'+str(x) for x in list(range(0, len(col_names)))]))
-    temp = pd.Series(aux_dict).to_frame()
-    temp.to_csv(os.path.normpath(os.path.join(path, name + '.col')), 
-                header=False, index=True)
+    aux_dict = {}
+    for i in list(range(0, len(col_names))):
+        if len(col_names[i]) > 10: # shapefile will trim the column name
+            aux_dict[col_names[i]] = 'c' + str(i) # use an alias
+
+    # nome do arquivo para salvar a correspondencia de colunas
+    name_col_file = os.path.normpath(os.path.join(path, name + '.col'))
+    # se antes exisita tal arquivo e nao vai precisar mais, apaga o anterior para nao gerar lixo
+    if aux_dict == {}:                
+        if os.path.exists(name_col_file): os.remove(name_col_file)
+        
+    if aux_dict != {}:
+        # estrutra o arquivo e salva        
+        temp = pd.Series(aux_dict).to_frame()
+        temp.to_csv(name_col_file, header=False, index=True) # vai salvar por cima se existente
+        
+        # renomeia o df para as novas colunas
+        df = df.rename(columns=aux_dict) 
     
-    df = df.rename(columns=aux_dict)    
-    df.to_file(os.path.normpath(os.path.join(path, name + '.shp')), 
-               driver='ESRI Shapefile')
+    
+    # salva o geoDataFrame
+    ext = ext.upper()
+    if ext == 'GPKG':
+        df.to_file(os.path.normpath(os.path.join(path, name + '.gpkg')), 
+                   driver="GPKG")
+    elif ext == 'SHP':
+        df.to_file(os.path.normpath(os.path.join(path, name + '.shp')), 
+                   driver='ESRI Shapefile')
+    elif ext == 'GEOJSON':
+        df.to_file(os.path.normpath(os.path.join(path, name + '.geojson')), 
+                   driver='GeoJSON')        
+    else:
+        raise Exception(f'Extension ({ext}) not supported')
     return True
 
 
 def save_df_as_excel(df, path, name, sheet_name='Sheet1', startrow=None,
-                     truncate_sheet=False, **to_excel_kwargs):
+                     truncate_sheet=False, **kwargs):
 
     filename = file_name_with_extension(path, name, ext='.xlsx')
            
     # Ignore [engine] parameter if it was passed.
-    if 'engine' in to_excel_kwargs:
-        to_excel_kwargs.pop('engine')
+    if 'engine' in kwargs:
+        kwargs.pop('engine')
 
     try:
         # Try to open an existing workbook.
@@ -200,7 +230,7 @@ def save_df_as_excel(df, path, name, sheet_name='Sheet1', startrow=None,
 
     # Write out the new sheet.
     df.to_excel(writer, sheet_name, startrow=startrow, 
-                index=False, **to_excel_kwargs)
+                index=False, **kwargs)
 
     # Save the workbook.
     writer.save()
