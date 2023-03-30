@@ -16,7 +16,7 @@ from pyproj import Proj
 from shapely.geometry import LineString, Point
 
 # Systool Modules
-from .utils import flatt_geom as fg
+from systool.utils import flatt_geom as fg
 
 
 def get_line_zoning_and_muni(line_shp, zone_shp, column_id_zone='ID_ZONE', column_nm_muni='NM_MUNI'):
