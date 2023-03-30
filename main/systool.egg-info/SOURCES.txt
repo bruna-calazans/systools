@@ -12,6 +12,7 @@ main/systool.egg-info/SOURCES.txt
 main/systool.egg-info/dependency_links.txt
 main/systool.egg-info/requires.txt
 main/systool.egg-info/top_level.txt
+main/systool/utils/__init__.py
 main/systool/utils/charts.py
 main/systool/utils/flatt_geom.py
 main/systool/utils/get_ftp_data.py
