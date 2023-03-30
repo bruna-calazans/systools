@@ -1,30 +1,42 @@
-Passos-Pip:
+Passos para colocar o pacote no PIP
+=====================================
+Tenha em um ambiente (ou no *base* os seguintes pacotes):
+pip install setuptools==65.6.3  #build=py39haa95532_0
+pip install twine==4.0.1        #build=pypi_0
 
-1 - Pip install setuptools.
+===================================
+1 - Entrar na pasta do projeto na instância mais externa.
 
-2 - Entrar na pasta do projeto na instância mais externa.
+2 - Atualizar o setup.py com as informações do projeto e o README com a versão
 
-3 - Editar o setup.py com as informações do projeto e o README com a versão
-3.1) entrar em systools\main\systool\__init__.py e apagar os ".." de todos os imports
+3 - Entrar em systools\main\systool\__init__.py e apagar os ".." de todos os imports
 
-4 - Rodar no terminal dentro da pasta do projeto "python setup.py sdist bdist_wheel".
+4 - Deletar a pasta build e dist
 
-5 - Usar pip install twine.
+5 - Rodar no terminal dentro da pasta do projeto "python setup.py sdist bdist_wheel".
 
 6 - Rodar no terminal dentro da pasta do projeto "twine upload dist/*"
+Será requisitado usuário e senha do PyPI (a senha vc digita e não aparece que está digitando, apenas pressione enter)
 
-7 - Digitar usuário e senha do pypi.
+PRONTO!
 
-8 - Testar.
-> pip install systool
-> python
+Testando se funciona...
+=============================
+Ative um env novo ou existente de teste
+Instale a versão que acabou de subir pro PyPI (caso diga que ela não existe, entre na página do PyPI dela, parece que dá um refresh e o comando funciona)
+
+conda activate myTestEnv
+pip install systool==x.y.z
+python
 > import systool
->> be happy
-9 - entrar no systools\main\systool\__init__.py e adicionar o ".." para que funcione nos testes locais
+
+Se der erros... tende de novo!
+
+Para usar o pacote direto do GIT e fazer os testes de desenvolvimento...
+===========================
+1 - entrar no systools\main\systool\__init__.py e adicionar o ".." para que funcione nos testes locais
 Ex:
 from systool import geo
 para
 from ..systool import geo
 
-
-> se der errado/esquecer de algo, recomece do passo (4)
