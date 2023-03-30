@@ -4,7 +4,7 @@ from setuptools import setup
 setup(
   
     name='systool',
-    version='0.6.1',
+    version='0.6.2',
     license='MIT',
     description='Set of high level funcions that optimize our work as transport planners',
     author="Bruna Calazans (bruna-calazans) & Pedro Chiachio (pcardoso-sk)",
