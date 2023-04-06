@@ -207,7 +207,7 @@ def find_outliers(model, x, y, intercept, cov_type,plot=False):
 
 def corr_mtx(df):
     fig, ax = plt.subplots()
-    mask = np.zeros_like(df.corr(), dtype=np.bool)
+    mask = np.zeros_like(df.corr(), dtype=bool)
     mask[np.triu_indices_from(mask)] = True
     sns.heatmap(df.corr(), mask = mask, annot=True,vmin=-1, vmax=1, center=0, cmap='RdBu')
     return
@@ -295,7 +295,7 @@ def get_correlated_pairs(df, Xcols, LIMIT=0.5):
     # filter ultra correlated values
     mask_correlated = corr > LIMIT
     # filter upper triangle
-    mask_upperTriangle = np.zeros_like(corr, dtype=np.bool)
+    mask_upperTriangle = np.zeros_like(corr, dtype=bool)
     mask_upperTriangle[np.triu_indices_from(mask_upperTriangle)] = True
     
     # get True/False for ultra correlated

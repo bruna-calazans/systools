@@ -1,4 +1,4 @@
-name: systra
+name: test_systool
 channels:
   - conda-forge
   - defaults

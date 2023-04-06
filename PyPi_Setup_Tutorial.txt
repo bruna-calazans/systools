@@ -13,7 +13,7 @@ pip install twine==4.0.1        #build=pypi_0
 
 4 - Deletar a pasta build e dist
 
-5 - Rodar no terminal dentro da pasta do projeto "python setup.py sdist bdist_wheel".
+5 - Abra um cmd do anaconda, dê cd até a pasta mais externa do projeto, ative o conda env em que vc tem setuptools e twine isntalados e rode: "python setup.py sdist bdist_wheel".
 
 6 - Rodar no terminal dentro da pasta do projeto "twine upload dist/*"
 Será requisitado usuário e senha do PyPI (a senha vc digita e não aparece que está digitando, apenas pressione enter)
