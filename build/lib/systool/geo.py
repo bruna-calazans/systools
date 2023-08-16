@@ -131,7 +131,7 @@ def calc_dist_milepost(gdf, mask=None, x='UTMx', y='UTMy', new_col='dist'):
     gdf.loc[mask, new_col] = (gpd.GeoSeries(gdf.loc[mask, 'geometry']).project(gpd.GeoSeries(gdf.loc[mask, 'pe'])))
     gdf.loc[~mask, new_col] = None  # garantees if colum already existed to erase
 
-    gdf = gdf.drop('pe', 1)
+    gdf = gdf.drop('pe', axis=1)
 
     return gdf
 
@@ -181,7 +181,7 @@ def calc_dist_orthogonal(df, mask=None, x='UTMx', y='UTMy', new_col='dist'):
 
     df.loc[mask, new_col] = (gpd.GeoSeries(df.loc[mask, 'geometry']).distance(gpd.GeoSeries(df.loc[mask, 'pe'])))
 
-    gdf = df.drop('pe', 1)
+    gdf = df.drop('pe', axis=1)
 
     return gdf
 

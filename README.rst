@@ -1,4 +1,4 @@
-# SysTool v.0.6.3
+# SysTool v.0.6.4
 
 Reune funções úteis para o tratamento e visualização de dados. 
 Uso particular em Engenharia de Transportes.
