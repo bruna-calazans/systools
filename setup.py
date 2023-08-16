@@ -4,7 +4,7 @@ from setuptools import setup
 setup(
   
     name='systool',
-    version='0.6.3',
+    version='0.6.4',
     license='MIT',
     description='Set of high level funcions that optimize our work as transport planners',
     author="Bruna Calazans (bruna-calazans) & Pedro Chiachio (pcardoso-sk)",
@@ -22,7 +22,7 @@ setup(
                       'numpy==1.24.2',
                       'matplotlib==3.7.1',
                       'matplotlib-scalebar==0.8.1',
-                      'pyqt==5.15.7',
+                      'pyqt5==5.15.7',
                       'geopandas==0.12.2',
                       'openpyxl==3.1.2',
                       'seaborn==0.12.2',
