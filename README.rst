@@ -1,7 +1,8 @@
-# SysTool v.0.6.4
+# SysTool v.0.6.5
 
 Reune funções úteis para o tratamento e visualização de dados. 
 Uso particular em Engenharia de Transportes.
+Ao instalar também inclui o spyder==5.4.4
 
 Módulos já utilizáveis:
 
