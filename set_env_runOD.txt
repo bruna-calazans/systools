@@ -1,0 +1,8 @@
+conda create --name runod python==3.11.5
+conda activate runod
+conda install pip
+pip install systool==0.6.5
+conda install json5==0.9.5=pyh9f0ad1d_0
+pip install tilemapbase==0.4.7
+conda install topojson==1.5=pyhd8ed1ab_0
+conda install networkx==3.0=pyhd8ed1ab_0

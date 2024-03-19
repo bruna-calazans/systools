@@ -3,11 +3,12 @@ pandas==1.5.3
 numpy==1.24.2
 matplotlib==3.7.1
 matplotlib-scalebar==0.8.1
-pyqt5==5.15.7
+pyqt5==5.15.9
 geopandas==0.12.2
 openpyxl==3.1.2
 seaborn==0.12.2
 statsmodels==0.13.5
+spyder==5.4.4
 tqdm==4.65.0
 scipy==1.10.1
 plotly==5.13.1

@@ -273,7 +273,7 @@ def prepare_data_corr_plot_alterado(x, lags, zero):
         lags = np.arange(not zero, int(lags) + 1)  # +1 for zero lag
     else:
         irregular = True
-        lags = np.asanyarray(lags).astype(np.int)
+        lags = np.asanyarray(lags).astype(int)
     nlags = lags.max(0)
 
     return lags, nlags, irregular
@@ -317,7 +317,7 @@ def plot_acf_durbin_watson(pvalue, x, ax=None, lags=None, alpha=.05,
             lags = lags[1:]
             confint = confint[1:]
             acf_x = acf_x[1:]
-        lags = lags.astype(np.float)
+        lags = lags.astype(float)
         lags[0] -= 0.5
         lags[-1] += 0.5
         #ax.fill_between(lags, confint[:, 0] - acf_x,confint[:, 1] - acf_x, alpha=.25)
