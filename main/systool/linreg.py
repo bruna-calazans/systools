@@ -30,7 +30,7 @@ from .utils.linear_regression_plot import plot_regression, give_name
 from .utils import report
 
 
-def fit_model(x, y, intercept=False, cov_type='nonrobust', plot=False, path=None):
+def fit_model(x, y, intercept=False, cov_type='nonrobust', plot=False, path=None,custom_name='',open_after=False):
     """
     Executa regressão e testa retirada de outliers
     Retorna dois modelos, um completo e outro sem outliers
@@ -84,7 +84,7 @@ def fit_model(x, y, intercept=False, cov_type='nonrobust', plot=False, path=None
         # Monta o nome do HTML e gráficos
         if path is None:
             path = os.getcwd()
-        name = give_name(x, y, intercept)
+        name = give_name(x, y, intercept, custom_name)
         
         # plota gráficos e salva HTML
         list_2_plots_a = plot_regression(model, x, y, intercept)
@@ -99,7 +99,7 @@ def fit_model(x, y, intercept=False, cov_type='nonrobust', plot=False, path=None
             report.save_html(path, name, dict_pages)    
         
         # tenta abrir HTML automaticamente
-        report.open_html(path, name)
+        if open_after: report.open_html(path, name)
     return model, model_out
 
 

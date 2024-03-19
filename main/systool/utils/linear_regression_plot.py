@@ -74,7 +74,7 @@ def concatena_cols(df):
     return palavra
 
 # Monta o nome do HTML
-def give_name(x, y, intercept):
+def give_name(x, y, intercept, custom_name=''):
     Ycolumns = y.name
     Xcolumns = concatena_cols(x)
     if(intercept):
@@ -82,7 +82,8 @@ def give_name(x, y, intercept):
     else:
         inter = '_intercepNO_ZN'
     number_of_rows = str(len(x))
-    return 'regModel_' + Ycolumns + '=' + Xcolumns + inter + number_of_rows + '.html'
+    if custom_name != '': custom_name += '_'
+    return 'regModel_' + custom_name + Ycolumns + '=' + Xcolumns + inter + number_of_rows + '.html'
 
 
 #%% Aux plots
